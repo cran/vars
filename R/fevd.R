@@ -8,7 +8,7 @@ function(x, n.ahead=10){
   p <- x$p
   ynames <- colnames(x$datamat[, 1 : K])
   msey <- .fecov(x, n.ahead=n.ahead)
-  Psi <- Psi(x)
+  Psi <- Psi(x, nstep = n.ahead)
   mse <- matrix(NA, nrow = n.ahead, ncol = K)
   Omega <- array(0, dim=c(n.ahead, K, K))
   for(i in 1 : n.ahead){

@@ -1,0 +1,5 @@
+2006-07-26  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
+
+	* fevd.R: Changed program line: 
+	Psi <- Psi(x)to Psi <- Psi(x, nstep = n.ahead) 
+
