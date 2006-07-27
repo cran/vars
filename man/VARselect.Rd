@@ -41,13 +41,13 @@ VARselect(y, lag.max = 10, type = c("const", "trend", "both", "none"))
   Based on the same sample size the following information criteria and
   the final prediction error are computed:
   \deqn{
-    AIC(n) = \log \det(\tilde{\Sigma}_u(n)) + \frac{2}{T}n K^2 \quad, 
+    AIC(n) = \ln \det(\tilde{\Sigma}_u(n)) + \frac{2}{T}n K^2 \quad, 
   }
   \deqn{
-    HQ(n) = \log \det(\tilde{\Sigma}_u(n)) + \frac{2 \log(\log(T))}{T}n K^2 \quad,
+    HQ(n) = \ln \det(\tilde{\Sigma}_u(n)) + \frac{2 \ln(\ln(T))}{T}n K^2 \quad,
   }
   \deqn{
-    SC(n) = \log \det(\tilde{\Sigma}_u(n)) + \frac{\log(T)}{T}n K^2 \quad,
+    SC(n) = \ln \det(\tilde{\Sigma}_u(n)) + \frac{\ln(T)}{T}n K^2 \quad,
   }
 
   \deqn{
@@ -60,7 +60,8 @@ VARselect(y, lag.max = 10, type = c("const", "trend", "both", "none"))
 }
 
 \value{
-  A list with the following elements:
+  A list with the following elements:\cr
+  
   \item{selection}{Vector with the optimal lag number according to each
     criterium.}  
   \item{criteria}{A matrix containing the values of the criteria up to \code{lag.max}.}

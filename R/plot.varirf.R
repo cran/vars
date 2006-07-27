@@ -7,10 +7,14 @@ function(x, ...){
     for(j in 1 : idx2){
       limit1 <- min(c(x$irf[[i]][, j], x$Lower[[i]][, j], x$Upper[[i]][, j]))
       limit2 <- max(c(x$irf[[i]][, j], x$Lower[[i]][, j], x$Upper[[i]][, j]))
-      if(x$ortho){
-        text <- paste("Orthogonal Impulse Response from", x$impulse[i], "to", x$response[j], sep = " ")
-      } else {
-        text <- paste("Forecast Error Impulse Response from", x$impulse[i], "to", x$response[j], sep = " ")
+      if(x$model == "varest"){
+        if(x$ortho){
+          text <- paste("Orthogonal Impulse Response from", x$impulse[i], "to", x$response[j], sep = " ")
+        } else {
+          text <- paste("Forecast Error Impulse Response from", x$impulse[i], "to", x$response[j], sep = " ")
+        }
+      } else if(x$model == "svarest"){
+        text <- paste("SVAR Impulse Response from", x$impulse[i], "to", x$response[j], sep = " ")
       }
       if(x$cumulative) text <- paste(text, "(cumulative)", sep=" ")
       plot.ts(x$irf[[i]][, j], ylab = "", xlab = "", ylim = c(limit1, limit2), main = text)

@@ -18,12 +18,33 @@ function(x, n.ahead) {
   }
   return(Sigma.yh)
 }
+## Forecast variance-covariance matrix (SVAR)
+".fecovsvar" <-
+function(x, n.ahead) {
+  Sigma.yh <- array(NA, dim = c(x$var$K, x$var$K, n.ahead))
+  Phi <- Phi(x, nstep = n.ahead)
+  Sigma.yh[, , 1] <- Phi[, , 1]%*%t(Phi[, , 1])
+  if (n.ahead > 1) {
+    for (i in 2:n.ahead) {
+      temp <- matrix(0, nrow = x$var$K, ncol = x$var$K)
+      for (j in 2:i) {
+        temp <- temp + Phi[, , j]%*%t(Phi[, , j])
+      }
+      Sigma.yh[, , i] <- temp + Sigma.yh[, , 1]
+    }
+  }
+  return(Sigma.yh)
+}
 ## irf (internal)
 ".irf" <-
 function(x, impulse, response, y.names, n.ahead, ortho, cumulative){
-  if(ortho){
-    irf <- Psi(x, nstep = n.ahead)
-  } else {
+  if(class(x) == "varest"){
+    if(ortho){
+      irf <- Psi(x, nstep = n.ahead)
+    } else {
+      irf <- Phi(x, nstep = n.ahead)
+    }
+  } else if(class(x) == "svarest"){
     irf <- Phi(x, nstep = n.ahead)
   }
   dimnames(irf) <- list(y.names, y.names, NULL)
@@ -49,34 +70,38 @@ function(x, impulse, response, y.names, n.ahead, ortho, cumulative){
 ".boot" <-
 function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.names){
   if(!(is.null(seed))) set.seed(abs(as.integer(seed)))
-  p <- x$p
-  K <- x$K
-  obs <- x$obs
-  total <- x$totobs
-  type <- x$type
-  B <- B(x)
+  ifelse(class(x) == "varest", VAR <- x, VAR <- x$var)
+  p <- VAR$p
+  K <- VAR$K
+  obs <- VAR$obs
+  total <- VAR$totobs
+  type <- VAR$type
+  B <- B(VAR)
   BOOT <- list()
   ysampled <- matrix(0, nrow = total, ncol = K)
-  colnames(ysampled) <- colnames(x$y)
+  colnames(ysampled) <- colnames(VAR$y)
   Zdet <- switch(type,
                  "const" = matrix(rep(1, obs), nrow = obs, ncol = 1),
                  "trend" = matrix(seq(1 : obs), nrow = obs, ncol = 1),
                  "both" = matrix(rep(1, obs), seq(1 : obs), nrow = obs, ncol = 2),
                  "none" = NULL)
-  resorig <- scale(x$resid, scale = FALSE)
-  B <- B(x)
+  resorig <- scale(VAR$resid, scale = FALSE)
+  B <- B(VAR)
   for(i in 1:runs){
     booted <- sample(c(1 : obs), replace=TRUE)
     resid <- resorig[booted, ]
-    lasty <- c(t(x$y[p : 1, ]))
-    ysampled[c(1 : p), ] <- x$y[c(1 : p), ]
+    lasty <- c(t(VAR$y[p : 1, ]))
+    ysampled[c(1 : p), ] <- VAR$y[c(1 : p), ]
     for(j in 1 : obs){
       lasty <- lasty[1 : (K * p)]
       Z <- c(Zdet[j, ], lasty)
       ysampled[j + p, ] <- B %*% Z + resid[j, ]
       lasty <- c(ysampled[j + p, ], lasty) 
     }
-    varboot <- VAR(y = ysampled, type = type, p = p)
+    varboot <- update(VAR, y = ysampled)
+    if(class(x) == "svarest"){
+      varboot <- update(x, x = varboot)
+    }
     BOOT[[i]] <- .irf(x = varboot, n.ahead = n.ahead, ortho = ortho, cumulative = cumulative, impulse = impulse, response = response, y.names=y.names)
   }
   lower <- ci / 2

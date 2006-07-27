@@ -1,5 +1,18 @@
-export(A, arch, B, causality, fevd, irf, normality, Phi, Psi, restrict, serial, stability, VAR, VARselect)
+export(A, arch, B, causality, fevd, irf, normality, Phi, Psi, restrict, serial, stability, SVAR, VAR, VARselect)
 
+
+S3method(fevd, varest)
+S3method(fevd, svarest)
+
+S3method(irf, varest)
+S3method(irf, svarest)
+
+S3method(Phi, varest)
+S3method(Phi, svarest)
+
+S3method(Psi, varest)
+
+S3method(print, svarest)
 S3method(print, varcheck)
 S3method(print, varest)
 S3method(print, varfevd)

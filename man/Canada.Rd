@@ -28,10 +28,10 @@
   }
   The series in \code{Canada} are constructed as:\cr
   \tabular{rl}{
-  \code{prod} := \tab 100*(log(CAN1008S1/445241K)-log(445005DSA))\cr
-  \code{e} := \tab 100*log(445005DSA)\cr
+  \code{prod} := \tab 100*(ln(CAN1008S1/445241K)-ln(445005DSA))\cr
+  \code{e} := \tab 100*ln(445005DSA)\cr
   \code{U} := \tab 444113DSA\cr
-  \code{rw} := \tab 100*log(100*444321KSA)\cr
+  \code{rw} := \tab 100*ln(100*444321KSA)\cr
   }
   Hence, \code{prod} is used as a measure of labour productivity;
   \code{e} is used for employment; \code{U} is the unemployment rate and

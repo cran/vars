@@ -1,3 +1,47 @@
+2006-07-27    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/SVAR.R: Function added for SVAR estimation (A-, B-, and AB-model); 
+	returns a list with class attribute 'svarest'.
+	
+	* R/Psi.varest.R: Method 'Psi' for 'varest' objects.
+
+	* R/Psi.R: Defined formerly function 'Psi' as S3-method.
+
+	* R/plot.varirf.R: Adapted plot method for objects of class 'svarest'.
+	
+	* R/irf.varest.R: Method 'irf' for 'varest' objects.
+
+	* R/irf.svarest.R: Method 'irf' for 'svarest' objects.
+
+	* R/irf.R: Defined formerly function 'irf' as S3-method.
+
+	* R/fevd.varest.R: Method 'fevd' for 'varest' objects.
+
+	* R/fevd.svarest.R: Method 'fevd' for 'svarest' objects.
+
+	* R/fevd.R: Defined formerly function 'fevd' as S3-method.
+
+	* R/Phi.varest.R: Method 'Phi' for 'varest' objects.
+
+	* R/Phi.svarest.R: Method 'Phi' for 'svarest' objects.
+
+	* R/Phi.R ("Phi"): Defined formerly function 'Phi' as S3-method.
+
+	* man/SVAR.Rd: Rd-file for function 'SVAR' created.
+
+	* man/fevd.Rd: \alias for 'fevd.varest' and 'fevd.svarest' included 
+	and \arguments and \usage sections adjusted.
+
+	* man/Phi.Rd: \alias for 'Phi.varest' and 'Phi.svarest' included 
+	and \arguments and \usage sections adjusted.
+
+	* man/irf.Rd: \alias for 'irf.varest' and 'irf.svarest' included 
+	and \arguments and \usage sections adjusted.
+
+	* man/Psi.Rd: \alias for 'Psi.varest' included and \arguments 
+	and \usage sections adjusted.
+
+	
 2006-07-26  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
 
 	* fevd.R: Changed program line: 

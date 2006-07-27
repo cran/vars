@@ -66,7 +66,8 @@ causality(x, cause = NULL)
 }
 
 \value{
-  A list with elements of class \sQuote{\code{htest}}:
+  A list with elements of class \sQuote{\code{htest}}:\cr
+  
   \item{Granger}{The result of the Granger-causality test.}
   \item{Instant}{The result of the instantaneous causality test.}
 }

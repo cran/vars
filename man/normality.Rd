@@ -31,7 +31,8 @@ normality(x)
 
 \value{
   A list of class \sQuote{\code{varcheck}} with the following elements is
-  returned:
+  returned:\cr
+  
   \item{resid}{A matrix of the residuals.}
   \item{jb.uni}{A list of elements with class attribute
     \sQuote{\code{htest}} containing the univariate Jarque-Bera tests.}
