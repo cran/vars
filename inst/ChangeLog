@@ -1,3 +1,11 @@
+2006-08-27  Dr. Bernhard Pfaff  <bernhard@pfaffikus>
+
+	* man/roots.Rd: Rd-file for new function 'roots' added.
+
+	* R/roots.R: Function for calculating eigenvalues added.
+
+	* NAMESPACE: Function 'root' added to 'NAMESPACE'.
+	
 2006-07-27    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/SVAR.R: Function added for SVAR estimation (A-, B-, and AB-model); 
