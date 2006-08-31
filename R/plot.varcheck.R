@@ -6,7 +6,7 @@ function(x, ...){
     layout(matrix(c(1, 2, 3, 4, 5, 6), nrow=3, ncol=2, byrow=TRUE))
     plot.ts(resids[, i], main = paste("Diagram of fit for", colnames(resids)[i], "residuals", sep=" "), ylim = c(min(resids[, i]), max(resids[, i])), ylab = "", lty = 1)
     abline(h = 0, col = "red")
-    hist(resids[, i], main = "Histogram and EDF", freq = FALSE)
+    hist(resids[, i], main = "Histogram and EDF", freq = FALSE, xlab = "")
     lines(density(resids[, i]), col = "blue")
     acf(resids[, i], main = "ACF Residuals", ylab = "")
     pacf(resids[, i], main = "PACF Residuals", ylab = "")

@@ -28,7 +28,7 @@
   estimated VAR, beginning with \eqn{h = 1, 2, \ldots, n.ahead}:  
 
   \deqn{
-    \bold{y}_{T+1 | T} = A_1 \bold{y}_T  + \ldots A_p \bold{y}_{T+1-p} +
+    \bold{y}_{T+1 | T} = A_1 \bold{y}_T  + \ldots + A_p \bold{y}_{T+1-p} +
     C D_{T+1}
   }
   
@@ -44,6 +44,7 @@
     forecasted values with lower and upper bounds as well as the
     confidence interval.} 
   \item{endog}{Matrix of the in-sample endogenous variables.}
+  \item{model}{The estimated VAR \code{object}.}
 }
 
 \author{Bernhard Pfaff}
@@ -57,7 +58,7 @@
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{plot.varprd}}
+  \code{\link{VAR}}, \code{\link{plot.varprd}}, \code{\link{fanchart}}
 } 
 
 \examples{

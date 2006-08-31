@@ -30,7 +30,7 @@
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{predict.varest}} 
+  \code{\link{VAR}}, \code{\link{predict.varest}}, \code{\link{fanchart}} 
 }
 
 \examples{

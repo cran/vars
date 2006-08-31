@@ -1,3 +1,16 @@
+2006-08-31  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
+
+	* R/fanchart.R: Function for fan chart added (needs object of
+	class 'varprd').
+
+	* man/fanchart.Rd: Help file for function 'fanchart()' added.
+
+	* NAMESPACE: Entry for function 'fanchart()' added.
+
+2006-08-29  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
+
+	* R/plot.varcheck.R: xlab = "" argument inserted in hist(). 
+
 2006-08-27  Dr. Bernhard Pfaff  <bernhard@pfaffikus>
 
 	* man/roots.Rd: Rd-file for new function 'roots' added.

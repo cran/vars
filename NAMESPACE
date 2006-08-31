@@ -1,4 +1,4 @@
-export(A, arch, B, causality, fevd, irf, normality, Phi, Psi, restrict, roots, serial, stability, SVAR, VAR, VARselect)
+export(A, arch, B, causality, fanchart, fevd, irf, normality, Phi, Psi, restrict, roots, serial, stability, SVAR, VAR, VARselect)
 
 
 S3method(fevd, varest)
@@ -30,5 +30,9 @@ S3method(plot, varstabil)
 
 S3method(predict, varest)
 S3method(summary, varest)
+
+
+
+
 
 
