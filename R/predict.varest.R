@@ -53,7 +53,7 @@ function(object, ..., n.ahead = 10, ci = 0.95){
     colnames(forecasts[[i]]) <- c("fcst", "lower", "upper", "CI")
   }
   names(forecasts) <- ynames
-  result <- list(fcst = forecasts, endog = object$y) 
+  result <- list(fcst = forecasts, endog = object$y, model = object) 
   class(result) <- "varprd"
   return(result)
 }
