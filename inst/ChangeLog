@@ -1,3 +1,7 @@
+2006-11-02  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
+
+	* R/roots.R: If-clause inserted for checking p > 1
+
 2006-09-13  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
 
 	* inst/doc/vars.Rnw: Vignette created.

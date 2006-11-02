@@ -8,10 +8,12 @@ function(x, modulus = TRUE){
   A <- unlist(A(x))
   companion <- matrix(0, nrow = K * p, ncol = K * p)
   companion[1:K, 1:(K*p)] <- A
-  j <- 0
-  for( i in (K + 1) : (K*p)){
-    j <- j + 1
-    companion[i, j] <- 1
+  if(p > 1){
+    j <- 0
+    for( i in (K + 1) : (K*p)){
+      j <- j + 1
+      companion[i, j] <- 1
+    }
   }
   roots <- eigen(companion)$values
   if(modulus) roots <- Mod(roots)
