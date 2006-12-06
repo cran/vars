@@ -54,7 +54,7 @@ function(x, cause = NULL){
   METHOD <- paste("Granger causality:", paste(y1.names, collapse=" "), "do not Granger-cause", paste(y2.names, collapse=" "))
   result1 <- list(statistic = STATISTIC, parameter = c(PARAMETER1, PARAMETER2), p.value = PVAL, method = METHOD, data.name = paste("VAR object", obj.name))
   class(result1) <- "htest"
-  sigma.u <- crossprod(x$resid) / obs
+  sigma.u <- crossprod(x$resid) / (obs - ncol(Z))
   colnames(sigma.u) <- y.names
   rownames(sigma.u) <- y.names
   select <- sigma.u[rownames(sigma.u) %in% y2.names, colnames(sigma.u) %in% y1.names ]

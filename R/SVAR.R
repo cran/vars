@@ -25,7 +25,8 @@ function(x, Amat = NULL, Bmat = NULL, start = NULL, ...){
   params <- params.A + params.B
   K <- x$K
   obs <- x$obs
-  sigma <- crossprod(x$resid) / obs
+  df <- summary(x$varresult[[1]])$df[2]
+  sigma <- crossprod(x$resid) / df
   if((svartype == "B-model") || (svartype == "A-model")){
     if(K^2 - params <= K*(K-1)/2){
       stop("\nModel is not identified,\nchoose different settings for 'Amat' and/or 'Bmat'.\n")      
@@ -110,7 +111,7 @@ function(x, Amat = NULL, Bmat = NULL, start = NULL, ...){
   METHOD <- "LR overidentification"
   LRover <- list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL, method = METHOD, data.name = deparse(substitute(x)))
   class(LRover) <- "htest"
-  result <- list(A = Amat, Ase = Asigma, B = Bmat, Bse = Bsigma, Sigma.U = Sigma.U*100, LR = LRover, opt = opt, start = start, type = svartype, var = x, call=match.call())
+  result <- list(A = Amat, Ase = Asigma, B = Bmat, Bse = Bsigma, LRIM = NULL, Sigma.U = Sigma.U*100, LR = LRover, opt = opt, start = start, type = svartype, var = x, call=match.call())
   class(result) <- "svarest"
   return(result)
 }

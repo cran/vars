@@ -100,7 +100,10 @@ SVAR(x, Amat = NULL, Bmat = NULL, start = NULL, ...)
     \sQuote{\code{A}}, otherwise a null-matrix is returned.}
   \item{B}{If A- or AB-model, the matrix of estimated coeffiecients.}
   \item{Bse}{If \sQuote{\code{hessian = TRUE}}, the standard errors of
-    \sQuote{\code{A}}, otherwise a null-matrix is returned.}
+    \sQuote{\code{B}}, otherwise a null-matrix is returned.}
+  \item{LRIM}{For Blanchard-Quah estimation \code{LRIM} is the estimated
+    long-run impact matrix; for all other SVAR models \code{LRIM} is
+    \code{NULL}.}  
   \item{Sigma.U}{The variance-covariance matrix of the reduced form
     residuals times 100, \emph{i.e.}, \eqn{\Sigma_U = A^{-1}BB'A^{-1'}
       \times 100}.}
@@ -111,7 +114,7 @@ SVAR(x, Amat = NULL, Bmat = NULL, start = NULL, ...)
   \item{type}{SVAR-type, character, either \sQuote{A-model},
     \sQuote{B-model} or \sQuote{AB-model}.}
   \item{var}{The \sQuote{\code{varest}} object \sQuote{\code{x}}.} 
-  \item{call}{The \code{call} to \command{VAR()}.}
+  \item{call}{The \code{call} to \command{SVAR()}.}
 }
 
 \author{Bernhard Pfaff}

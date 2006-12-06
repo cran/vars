@@ -1,3 +1,15 @@
+2006-12-06  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* man/SVAR.Rd: Typo fixed in \value{} section.
+	* R/SVAR.R (svarest): Inserted list object LRIM = NULL
+	                      (used by Blanchard-Quah function BQ). 
+	* man/SVAR.Rd: Inserted description of list element LRIM.
+	* R/BQ.R: New function for Blanchard-Quah type SVAR.
+	* man/BQ.Rd: Documentation for BQ() created.
+	* R/print.svarest.R: Adjusted the print-method for Blanchard-Quah. 
+	* NAMESPACE: Inserted BQ
+	* R/SVAR.R (sigma): Used degrees of freedom instead of obs.
+	
 2006-11-02  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
 
 	* R/roots.R: If-clause inserted for checking p > 1
