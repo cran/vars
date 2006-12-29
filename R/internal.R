@@ -229,7 +229,7 @@ function(x, obs, K, obj.name){
   b1 <- apply(resids.std, 2, function(x) sum(x^3) / obs)
   b2 <- apply(resids.std, 2, function(x) sum(x^4) / obs)
   s3 <- obs * t(b1) %*% b1 / 6
-  s4 <- obs * t(b2 - rep(3, 4)) %*% (b2 - rep(3, 4)) / 24
+  s4 <- obs * t(b2 - rep(3, K)) %*% (b2 - rep(3, K)) / 24
   STATISTIC <- s3 + s4
   names(STATISTIC) <- "Chi^2"
   PARAMETER <- 2 * K

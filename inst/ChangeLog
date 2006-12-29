@@ -1,3 +1,7 @@
+2006-12-29  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R: .jb.multi: rep(3, K) instead of rep(3, 4).
+	
 2006-12-06  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* man/SVAR.Rd: Typo fixed in \value{} section.
