@@ -34,7 +34,13 @@ function(x, cause = NULL){
   colnames(temp) <- y.names
   rownames(temp) <- y.names
   temp <- as.vector(temp[rownames(temp) %in% y2.names, colnames(temp) %in% y1.names ]) + detcoeff
-  temp <- c(temp, rep(temp + K^2, p-1))
+  if(p > 1){
+    tmp <- temp
+    for(i in 1:(p-1)){
+      tmp <- c(tmp, temp + i*K^2)
+    }
+    temp <- tmp
+  }
   N <- length(temp)
   R <- matrix(0, nrow = N, ncol = dim(PI)[1] * dim(PI)[2])
   for(i in 1 : N){
@@ -43,7 +49,7 @@ function(x, cause = NULL){
   sigma.u <- crossprod(x$resid) / (obs - ncol(Z))
   sigma.pi <- kronecker(solve(crossprod(as.matrix(Z))), sigma.u)
   df1 <- N
-  df2 <- K * obs - K^2 * p - K
+  df2 <- K * obs - K^2 * p - detcoeff
   STATISTIC <- t(R %*% PI.vec) %*% solve(R %*% sigma.pi %*% t(R)) %*% R %*% PI.vec / N
   names(STATISTIC) <- "F-Test"
   PARAMETER1 <- df1
