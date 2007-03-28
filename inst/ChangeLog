@@ -1,3 +1,21 @@
+2007-03-26  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/vec2var.R: Function for converting VECM (objects belonging to 
+	formal class ca.jo) to VAR inserted. Added to NAMESPACE. 
+	* R/Phi.vec2var.R: Method 'Phi' for 'vec2var' objects.
+	* R/Psi.vec2var.R: Method 'Psi' for 'vec2var' objects.
+	* R/irf.vec2var.R: Method 'irf' for 'vec2var' objects. 
+	Internal functions .boot and .irf modified.	
+	* R/fevd.vec2var.R: Method 'fevd' for 'vec2var' objects. 
+	Internal functions .fecovvec2var inserted.
+	* R/Phi.varest.R: Fixed for p > 2.
+	* R/normality.R: Included 'vec2var' objects.
+	* R/serial.R: Included 'vec2var' objects. 
+	DF calculation adjusted in '.pt.multi'.
+	* R/arch.R: Included 'vec2var' objects. 
+	* R/predict.R: Predict method included.
+	* R/predict.vec2var.R: Method 'predict' for 'vec2var' objects.	
+	
 2007-03-07  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/causality.R ("causality"): Object temp corrected for proper 

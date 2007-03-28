@@ -1,0 +1,79 @@
+"predict.vec2var" <-
+function(x, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
+  n.ahead <- as.integer(n.ahead)
+  K <- x$K
+  p <- x$p
+  obs <- x$obs
+  data.all <- x$datamat
+  ynames <- colnames(x$y)
+  Z <- x$datamat[, -c(1 : K)]
+  B <- x$deterministic
+  for(i in 1:x$p){
+    B <- cbind(B, x$A[[i]])
+  }
+  ## Deterministic and lagged y's
+  ## Retrieval of A in matrix (whole)
+  Zdet <- matrix(rep(1, n.ahead), nrow = n.ahead, ncol = 1)
+  rownames(Zdet) <- seq(nrow(data.all) + 1, length = n.ahead)
+  if(!is.null(eval(x$vecm@call$season))){
+    season <- eval(x$vecm@call$season)
+    seas.names <- paste("sd", 1:(season-1), sep = "")
+    cycle <- tail(data.all[, seas.names], season)
+    seasonal <- matrix(cycle, nrow = season, ncol = season - 1)
+    if(nrow(seasonal) >= n.ahead){
+      seasonal <- matrix(cycle[1:n.ahead, ], nrow = n.ahead, ncol = season -1 )
+    } else {
+      while(nrow(seasonal) < n.ahead){
+        seasonal <- rbind(seasonal, cycle)
+      }
+      seasonal <- seasonal[1:n.ahead, ]
+    }
+    rownames(seasonal) <- seq(nrow(data.all) + 1, length = n.ahead)
+    Zdet <- cbind(Zdet, seasonal)
+  }
+  if(!is.null(eval(x$vecm@call$dumvar))){
+    if(is.null(dumvar)){
+      stop(paste("\nPlease, provide a matrix x for argument 'dumvar' with", n.ahead, "rows.\n", sep = " "))
+    }
+    if(!identical(nrow(dumvar), n.ahead)){
+      stop("\nNumber of rows of 'dumvar' is not equal to 'n.ahead'.\n")
+    }
+    if(!(colnames(dumvar) %in% colnames(B))){
+      stop("\nColumn names of 'dumvar' do not match with column names in 'x$datamat'.\n")
+    }
+    Zdet <- cbind(Zdet, dumvar)
+  }  
+  Zy <- subset(data.all, select = !(colnames(data.all) == colnames(x$deterministic)))[, 1:(x$K * x$p)] 
+  yse <- matrix(NA, nrow = n.ahead, ncol = K)
+  sig.y <- .fecovvec2var(x = x, n.ahead = n.ahead)
+  for(i in 1 : n.ahead){
+    yse[i, ] <- sqrt(diag(sig.y[, , i]))
+  }
+  yse <- -1 * qnorm((1 - ci) / 2) * yse
+  colnames(yse) <- paste(ci, "of", ynames)
+  ## forecast recursion
+  forecast <- matrix(NA, ncol = K, nrow = n.ahead)
+  lasty <- c(Zy[nrow(Zy), ])
+  for(i in 1 : n.ahead){
+    lasty <- lasty[1 : (K * p)]
+    Z <- c(Zdet[i, ], lasty)
+    forecast[i, ] <- B %*% Z
+    temp <- forecast[i, ]
+    lasty <- c(temp, lasty)
+  }
+  colnames(forecast) <- paste(ynames, ".fcst", sep="")
+  lower <- forecast - yse
+  colnames(lower) <- paste(ynames, ".lower", sep="")
+  upper <- forecast + yse
+  colnames(upper) <- paste(ynames, ".upper", sep="")
+  forecasts <- list()
+  for(i in 1 : K){
+    forecasts[[i]] <- cbind(forecast[, i], lower[, i], upper[, i], yse[, i])
+    colnames(forecasts[[i]]) <- c("fcst", "lower", "upper", "CI")
+  }
+  names(forecasts) <- ynames
+  result <- list(fcst = forecasts, endog = x$y, model = x) 
+  class(result) <- "varprd"
+  return(result)
+}
+

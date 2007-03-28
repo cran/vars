@@ -35,10 +35,28 @@ function(x, n.ahead) {
   }
   return(Sigma.yh)
 }
+## Forecast variance-covariance matrix (vec2var)
+".fecovvec2var" <-
+function(x, n.ahead) {
+  sigma.u <- crossprod(x$resid)/x$obs 
+  Sigma.yh <- array(NA, dim = c(x$K, x$K, n.ahead))
+  Sigma.yh[, , 1] <- sigma.u
+  Phi <- Phi(x, nstep = n.ahead)
+  if (n.ahead > 1) {
+    for (i in 2:n.ahead) {
+      temp <- matrix(0, nrow = x$K, ncol = x$K)
+      for (j in 2:i) {
+        temp <- temp + Phi[, , j] %*% sigma.u %*% t(Phi[, , j])
+      }
+      Sigma.yh[, , i] <- temp + Sigma.yh[, , 1]
+    }
+  }
+  return(Sigma.yh)
+}  
 ## irf (internal)
 ".irf" <-
 function(x, impulse, response, y.names, n.ahead, ortho, cumulative){
-  if(class(x) == "varest"){
+  if((class(x) == "varest") || (class(x) == "vec2var")){
     if(ortho){
       irf <- Psi(x, nstep = n.ahead)
     } else {
@@ -286,7 +304,11 @@ function(x, K, obs, lags.pt, obj.name, resids){
   ## htest objects for Qh and Qh.star
   STATISTIC <- Qh
   names(STATISTIC) <- "Chi^2"
-  PARAMETER <- (K^2 * lags.pt - nstar)
+  if(identical(class(x), "varest")){
+    PARAMETER <- (K^2 * lags.pt - nstar)
+  } else {
+    PARAMETER <- (K^2 * lags.pt - nstar + x$K)
+  }    
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = PARAMETER)
   METHOD <- "Portmanteau Test (asymptotic)"
@@ -294,7 +316,11 @@ function(x, K, obs, lags.pt, obj.name, resids){
   class(PT1) <- "htest"
   STATISTIC <- Qh.star
   names(STATISTIC) <- "Chi^2"
-  PARAMETER <- (K^2 * lags.pt - nstar)
+  if(identical(class(x), "varest")){
+    PARAMETER <- (K^2 * lags.pt - nstar)
+  } else {
+    PARAMETER <- (K^2 * lags.pt - nstar + x$K)
+  }        
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = PARAMETER)
   METHOD <- "Portmanteau Test (adjusted)"

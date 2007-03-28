@@ -8,13 +8,15 @@
 
 \alias{irf.svarest}
 
+\alias{irf.vec2var}
+
 \title{Impulse response function}
 
 \encoding{latin1}
 
 \description{
-  Computes the impulse response coefficients of a VAR(p) or a SVAR for
-  \code{n.ahead} steps. 
+  Computes the impulse response coefficients of a VAR(p) (or transformed
+  VECM to VAR(p)) or a SVAR for \code{n.ahead} steps. 
 }
 
 \usage{
@@ -22,6 +24,9 @@
 ortho = TRUE, cumulative = FALSE, boot = TRUE, ci = 0.95,
 runs = 100, seed = NULL, ...)
 \method{irf}{svarest}(x, impulse = NULL, response = NULL, n.ahead = 10,
+ortho = TRUE, cumulative = FALSE, boot = TRUE, ci = 0.95,
+runs = 100, seed = NULL, ...)
+\method{irf}{vec2var}(x, impulse = NULL, response = NULL, n.ahead = 10,
 ortho = TRUE, cumulative = FALSE, boot = TRUE, ci = 0.95,
 runs = 100, seed = NULL, ...)
 }
@@ -106,7 +111,7 @@ runs = 100, seed = NULL, ...)
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{Phi}}, \code{\link{Psi}},
+  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{vec2var}}, \code{\link{Phi}}, \code{\link{Psi}},
   \code{\link{plot.varirf}}
 }
 
@@ -132,4 +137,5 @@ FALSE)
 \concept{Structural vector autoregressive model}
 \concept{irf}
 \concept{impulse response function}
+\concept{VECM}
 
