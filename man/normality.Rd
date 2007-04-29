@@ -58,7 +58,7 @@ normality(x)
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{plot.varcheck}}
+  \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{plot.varcheck}}
 }
 
 \examples{

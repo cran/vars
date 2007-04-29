@@ -1,3 +1,18 @@
+2007-04-26  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* doc/vars.Rnw (section{VECM to VAR}): Vignette has been amended for 
+	(vec2var()).
+
+2007-03-29  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* man/fanchart.Rd: Adjusted for 'vec2var' and links.
+	* man/predict.Rd: Adjusted for 'vec2var' and links.
+	* man/vec2var.Rd: Links inserted.
+	* man/arch.Rd: Links adjusted.
+	* man/serial.Rd: Links adjusted.
+	* man/normality.Rd: Links adjusted.
+	* man/VAR.Rd: Links adjusted.	
+
 2007-03-26  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/vec2var.R: Function for converting VECM (objects belonging to 

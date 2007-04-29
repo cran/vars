@@ -69,7 +69,9 @@ VAR(y, p = 1, type = c("const", "trend", "both", "none"))
 
 \seealso{
   \code{\link{summary.varest}}, \code{\link{plot.varest}},
-  \code{\link{predict.varest}}  
+  \code{\link{predict}}, \code{\link{irf}}, \code{\link{fevd}},
+  \code{\link{Phi}}, \code{\link{Psi}}, \code{\link{normality}},
+  \code{\link{arch}}, \code{\link{serial}}  
 }
 
 \examples{

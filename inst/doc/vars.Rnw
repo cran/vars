@@ -4,7 +4,7 @@
 %
 \documentclass[a4paper]{article}
 %
-\title{vars: S3 classes and methods for estimating VAR and SVAR models}
+\title{Using the vars package}
 \author{Dr. Bernhard Pfaff, Kronberg im Taunus}
 %
 % Bibliographystle
@@ -19,7 +19,7 @@
 \begin{document}
 %
 % Instructions for vignette
-% \VignetteIndexEntry{vars: A S3 class and methods for estimating VAR and SVAR models}
+% \VignetteIndexEntry{Using the vars package}
 % \VignetteDepends{MASS, strucchange}
 %\VignetteKeywords{VAR, SVAR, lag selection, diagnsotics, forecasting, causality , FEVD and IRA.}
 %\VignettePackage{vars}
@@ -33,6 +33,7 @@ The package's code is purely written in \texttt{R} and S3-classes with methods h
 % 1st Sweave
 <<preliminaries, echo=false, results=hide>>= 
 library(vars)
+library(urca)
 library(xtable)
 @
 %
@@ -46,7 +47,7 @@ Since the critique of \citeasnoun{SIM1980} in the early eighties of the last cen
 \par
 To the author's knowledge, currently only functions in the base distribution of \texttt{R} and in the \texttt{CRAN}-packages \texttt{dse} (package bundle, see \citename{dse1} \citeyear*{dse3}, \citeyear*{dse2}, \citeyear*{dse1}) and \texttt{fMultivar} \cite{fMultivar} are made available for estimating ARIMA and VARIMA time series models. Though, the \texttt{CRAN}-package \texttt{MSBVAR} \cite{MSBVAR} provides methods for estimating frequentist and Bayesian Vector Autoregression (BVAR) models, the methods and functions provided in the package \texttt{vars} try to fill a gap in the econometrics' methods landscape of \texttt{R} by providing the `standard' tools in the context of VAR and SVAR analysis.\\
 \par
-The vignette is structured as follows: the next section is entirely devoted to VARs (definition, estimation, restrictions, diagnostic testing, forecasting, IRA and FEVD). In the ensuing section the topic of SVAR is elucidated (definition, estimation, IRA and FEVD). Finally, an outlook concludes this vignette covering further amendments of the package that will be implemented in the near future. 
+The vignette is structured as follows: the next section is entirely devoted to VARs (definition, estimation, restrictions, diagnostic testing, forecasting, IRA and FEVD). In the ensuing section the topic of SVAR is elucidated (definition, estimation, IRA and FEVD). Finally, the transformation of a VECM to a VAR in levels is exhibited with its associated methods and functions. 
 %
 %
 %
@@ -64,7 +65,7 @@ In its basic form, a VAR consists of a set of $K$ endogenous variables $\mathbf{
 \end{equation}
 %
 with $A_i$ are $(K \times K)$ coefficient matrices for $i = 1, \ldots, p$ and $\mathbf{u}_t$ is a K-dimensional white noise process with time invariant positive definite covariance matrix $E(\mathbf{u}_t \mathbf{u}_t') = \Sigma_{\mathbf{u}}$.\footnote{Vectors are assigned by small bold letters and matrices by capital letters. Scalars are written out as small letters. which are possibly subscripted.}\\
-\par
+\\par
 One important characteristic of a VAR(p)-process is its stability. This means that it generates stationary time series with time invariant means, variances and covariance structure, given sufficient starting values. One can check this by evaluating the reverse characteristic polynomial:
 %
 \begin{equation}
@@ -281,7 +282,35 @@ In the example above, the third and fourth coefficient of the employment equatio
 \subsection{Diagnostic testing}
 \label{subsec:var-diag}
 %
-In package `vars' the functions for diagnostic testing are \texttt{normality()}, \texttt{serial()} and \texttt{stability()}. The former two functions return a list object with class attribute \texttt{varcheck} for which a \texttt{plot}-method exists. The plots, one for each equation, include a residual plot, an empirical distribution plot and the ACFs and PACFs of the residuals and their squares. The function \texttt{stability()} returns a list object with class attribute \texttt{varstabil}. The function itself is just a wrapper for the function \texttt{efp()} from package \texttt{strucchange}. The first element of the returned list object is itself a list of objects with class attribute \texttt{efp}. Hence, the \texttt{plot}-method for objects of class \texttt{varstabil} just call the \texttt{plot}-method for objects of class \texttt{efp}. Let us now turn to each of these functions in more detail.\\
+In package `vars' the functions for diagnostic testing are \texttt{arch()}, \texttt{normality()}, \texttt{serial()} and \texttt{stability()}. The former three functions return a list object with class attribute \texttt{varcheck} for which a \texttt{plot}-method exists. The plots, one for each equation, include a residual plot, an empirical distribution plot and the ACFs and PACFs of the residuals and their squares. The function \texttt{stability()} returns a list object with class attribute \texttt{varstabil}. The function itself is just a wrapper for the function \texttt{efp()} from package \texttt{strucchange}. The first element of the returned list object is itself a list of objects with class attribute \texttt{efp}. Hence, the \texttt{plot}-method for objects of class \texttt{varstabil} just call the \texttt{plot}-method for objects of class \texttt{efp}. Let us now turn to each of these functions in more detail.\\
+\par
+The implemented tests for heteroscedasticity are the univariate and multivariate ARCH test (see \citeasnoun{ENG1982}, \citeasnoun{HAM1994} and \citeasnoun{LUE2006}). The multivariate ARCH-LM test is based on the following regression (the univariate test can be considered as special case of the exhibtion below and is skipped):
+%
+\begin{equation}
+vech(\hat{\mathbf{u}_t}\hat{\mathbf{u}_t}') = \mathbf{\beta}_0 + B_1 vech(\hat{\mathbf{u}}_{t-1}\hat{\mathbf{u}}_{t-1}') + \ldots + B_q vech(\hat{\mathbf{u}}_{t-q}\hat{\mathbf{u}}_{t-q}') + \mathbf{v}_t \quad , 
+\end{equation}
+%
+whereby $\mathbf{v}_t$ assigns a spherical error process and $vech$ is the column-stacking operator for symmetric matrices that stacks the columns from the main diagonal on downwards. The dimension of $\mathbf{\beta}_0$ is $\frac{1}{2}K(K +1)$ and for the coefficient matrices $B_i$ with $i=1, \ldots, q$, $\frac{1}{2}K(K +1) \times \frac{1}{2}K(K +1)$. The null hypothesis is: $H_0 := B_1 = B_2 = \ldots = B_q = 0$ and the alternative is: $H_1: B_1 \neq 0 \cap B_2 \neq 0 \cap \ldots \cap B_q \neq 0$. The test statistic is defined as:
+%
+\begin{equation}
+VARCH_{LM}(q) = \frac{1}{2}T K (K + 1)R_m^2 \quad ,
+\end{equation}
+%
+with
+%
+\begin{equation}
+R_m^2 = 1 - \frac{2}{K(K+1)}tr(\hat{\Omega} \hat{\Omega}_0^{-1}) \quad ,
+\end{equation}
+%
+and $\hat{\Omega}$ assigns the covariance matrix of the above defined regression model. This test statistic is distributed as $\chi^2(qK^2(K+1)^2/4)$.\\
+In the code example below this test is applied to the \texttt{var.2c} object.
+<<diag0, echo = TRUE>>=
+args(arch)
+var2c.arch <- arch(var.2c)
+names(var2c.arch)
+var2c.arch
+@ 
+%
 \par
 The Jarque-Bera normality tests for univariate and multivariate series are implemented and applied to the residuals of a VAR(p) as well as seperate tests for multivariate skewness and kurtosis (see \citeasnoun{BER1980}, [\citeyear*{BER1981}] and \citeasnoun{JAR1987} and \citeasnoun{LUE2006}). The univariate versions of the Jarque-Bera test are applied to the residuals of each equation. A multivariate version of this test can be computed by using the residuals that are standardized by a Choleski decomposition of the variance-covariance matrix for the centered residuals. Please note, that in this case the test result is dependant upon the ordering of the variables.
 % 
@@ -306,7 +335,7 @@ s_4^2 &= T( \mathbf{b}_2 - \mathbf{3}_K)'(\mathbf{b}_2 - \mathbf{3}_k) / 24 \; ,
 \end{align}
 \end{subequations}
 %
-with $\mathbf{b}_1$ and $\mathbf{b}_2$ are the third and fourth non-central moment vectors of the standardized residuals $\hat{\mathbf{u}}_t^s = \tilde{P}^{-}(\hat{\mathbf{u}}_t - \bar{\hat{\mathbf{u}}}_t)$ and $\tilde{P}$ is a lower triangular matrix with positive diagonal such that $\tilde{P}\tilde{P}' = \tilde{\Sigma}_{\mathbf{u}}$, \emph{i.e.}, the Choleski decomposition of the residual covariance matrix. The test statistic $JB_{mv}$ is distributed as $\chi^2(2K)$ and the multivariate skewness, $s_3^2$, and kurtosis test, $s_4^2$ are distributed as $\chi^2(K)$. These tests are returned in the list elements \texttt{jb.uni} and \texttt{jb.mul}, which consist of objects with class attribute \texttt{htest}. Hence, the \texttt{print}-method for these objects is employed in \texttt{print.varcheck}. In the code example above, the null hypothesis of normality cannot be rejected.\\
+with $\mathbf{b}_1$ and $\mathbf{b}_2$ are the third and fourth non-central moment vectors of the standardized residuals $\hat{\mathbf{u}}_t^s = \tilde{P}^{-}(\hat{\mathbf{u}}_t - \bar{\hat{\mathbf{u}}}_t)$ and $\tilde{P}$ is a lower triangular matrix with positive diagonal such that $\tilde{P}\tilde{P}' = \tilde{\Sigma}_{\mathbf{u}}$, \emph{i.e.}, the Choleski decomposition of the residual covariance matrix. The test statistic $JB_{mv}$ is distributed as $\chi^2(2K)$ and the multivariate skewness, $s_3^2$, and kurtosis test, $s_4^2$ are distributed as $\chi^2(K)$. Likewise to ARCH, these tests are returned in the list elements \texttt{jb.uni} and \texttt{jb.mul}, which consist of objects with class attribute \texttt{htest}. Hence, the \texttt{print}-method for these objects is employed in \texttt{print.varcheck}. In the code example above, the null hypothesis of normality cannot be rejected.\\
 \par
 For testing the lack of serial correlation in the residuals of a VAR(p), a Portmanteau test and the LM test proposed by Breusch \& Godfrey are implemented in the function \texttt{serial()}. For both tests small sample modifications are calculated too, whereby the modification for the LM has been introduced by \citeasnoun{EDG1999}. Likewise, to the function \texttt{normality()}, the test statistics are list elements of the returned object and have class attribute \texttt{htest}.\\
 The Portmanteau statistic is defined as:
@@ -676,6 +705,7 @@ A \mathbf{y}_t = A_1^* \mathbf{y}_{t-1} + \ldots + A_p^* \mathbf{y}_{t-p} + B \m
 It is assumed that the \emph{structural errors}, $\mathbf{\varepsilon}_t$, are white noise and the coefficient matrices $A_i^*$ for $i = 1, \ldots, p$, are structural coefficients that might differ from their reduced form counterparts. To see this, consider the resulting equation by left-multiplying equation \eqref{eq21} with the inverse of $A$:
 %
 \begin{equation}
+\label{eq22}
 \begin{split}
 \mathbf{y}_t & = A^{-1} A_1^* \mathbf{y}_{t-1} + \ldots + A^{-1} A_p^* \mathbf{y}_{t-p} + A^{-1} B \mathbf{\varepsilon}_t \\
 \mathbf{y}_t & = A_1 \mathbf{y}_{t-1} + \ldots + A_p \mathbf{y}_{t-p} + \mathbf{u}_t \; .
@@ -713,6 +743,7 @@ In the example above, an expository object \texttt{amat} has been set up. The ne
 The parameters are estimated by minimising the negative of the concentrated log-likelihood function:
 %
 \begin{equation}
+\label{eq23}
 \begin{split}
 \ln L_c(A, B) = &- \frac{KT}{2}\ln(2\pi) + \frac{T}{2}\ln|A|^2 -\frac{T}{2}\ln|B|^2 \\
 \; &- \frac{T}{2}tr(A'B'^{-1}B^{-1}A\tilde{\Sigma}_u) \; ,
@@ -737,6 +768,7 @@ names(svar2c.A)
 Dependent on the choosen model and if the argument \texttt{hessian = TRUE} has been set, the list elements \texttt{A, Ase, B, Bse} contain the estimated coefficient matrices with the numerical standard errors, if applicable. The element \texttt{LRIM} does contain the long-run impact matrix in case a SVAR of type Blanchard \& Quah is estimated, otherwise this element is \texttt{NULL} (see below for more details). The list element \texttt{Sigma.U} is the variance-covariance matrix of the reduced form residuals times 100, \emph{i.e.}, $\Sigma_U = A^{-1}BB'A^{-1'} \times 100$. The list element \texttt{LR} is an object with class attribute \texttt{htest}, holding the Likelihood ratio overidentification test, whereby the test statistic is defined as:
 %
 \begin{equation}
+\label{eq24}
 LR = T ( \log det(\tilde{\Sigma}_{\mathbf{u}}^r) - \log det(\tilde{\Sigma}_{\mathbf{u}})) \;
 \end{equation}
 %
@@ -745,18 +777,21 @@ with $\tilde{\Sigma}_{\mathbf{u}}$ being the ML estimator of the reduced form va
 Finally, it should be noted that the model proposed by \citeasnoun{BLA1989} can be considered as a particular SVAR-model of type $B$. The matrix $A$ is equal to $I_K$ and the matrix of the long-run effects is lower-triangular and defined as:
 %
 \begin{equation}
+\label{eq25}
 (I_K - A_1 - \cdots - A_P)^{-1}B \quad .
 \end{equation}
 %
 Hence, the residual of the second equation cannot exert a long-run influence on the first variable and likewise the third residual cannot impact the first and second variable. The estimation of the \citename{BLA1989} model is achieved by a Choleski decomposition of:
 %
 \begin{equation}
+\label{eq26}
 (I_K - \hat{A}_1 - \cdots - \hat{A}_p)^{-1}\hat{\Sigma}_u (I_K - \hat{A}_1' - \cdots - \hat{A}_p')^{-1}\quad .
 \end{equation}  
 %
 The matrices $\hat{A}_i$ for $i = 1, \ldots, p$ assign the reduced form estimates. The long-run impact matrix is the lower-triangular Choleski decomposition of this matrix and the contemporaneous impact matrix is equal to:
 %
 \begin{equation}
+\label{eq27}
 (I_K - A_1 - \cdots - A_p)Q \quad,
 \end{equation}
 %
@@ -801,17 +836,80 @@ legend("top", legend = names(svar2cA.fevd), fill = palette()[1 : 4], ncol = 4)
 \label{fig-svarfevd}
 \end{figure}
 %
-\section{Outlook}
-\label{sec:outlook}
-Although the `vars' package offer by now the most standard functionalities and methods in terms of VAR and SVAR modelling, future amendments and enhancements of the package will/should include:
-\begin{itemize}
-\item Inclusion of exogenous and seasonal dummies in a VAR.
-\item Utilisation of the EGLS method for restricted VARs.
-\item Add-in to the `Rcmdr' package of John Fox.
-\item External C-code interface for speed up bootstrap calculation.
-\item Utilisation of \dots-argument in plot methods.
-\end{itemize} 
-The items above do not appear in form of a ranking, but should rather be viewed as a wish list- or nice to have-entries. In any case, your feedback is most welcome and please adress any queries directly to the package author's email adress.
+%
+%
+\section{VECM to VAR}
+\label{sec:vec2var}
+%
+%
+%
+Reconsider the VAR presentation from equation \ref{eq1} on page \pageref{eq1}:
+\begin{equation}
+\label{eq28}
+\mathbf{y}_t = A_1 \mathbf{y}_{t-1} + \ldots + A_p \mathbf{y}_{t-p} + \mathbf{u}_t \quad ,
+\end{equation}
+The following vector error correction specifications do exist, which can be estimated with function \texttt{ca.jo()} contained in \texttt{urca}:
+%
+\begin{equation}
+\label{eq29}
+\Delta \mathbf{y}_t = \Pi \mathbf{y}_{t-p} + \Gamma_1 \Delta \mathbf{y}_{t-1} + \ldots + \Gamma_{p-1} \mathbf{y}_{t-p+1} + \mathbf{u}_t \quad ,
+\end{equation}
+%
+with
+%
+\begin{equation}
+\label{eq30}
+\Gamma_i = -(I - A_1 - \ldots - A_i), \quad i = 1, \ldots , p-1.
+\end{equation}
+%
+and
+%
+\begin{equation}
+\label{eq31}
+\Pi = -(I - A_1 - \ldots - A_p) \quad.
+\end{equation}
+The $\Gamma_i$ matrices contain the cumulative long-run impacts, hence this VECM specification is signified by longrun form. The other specification is given as follows:
+%
+\begin{equation}
+\label{eq32}
+\Delta \mathbf{y}_t = \Pi \mathbf{y}_{t-1} + \Gamma_1 \Delta \mathbf{y}_{t-1} + \ldots + \Gamma_{p-1} \mathbf{y}_{t-p+1} + \mathbf{u}_t \quad,
+\end{equation}
+with
+%
+\begin{equation}
+\label{eq33}
+\Gamma_i = -(A_{i+1} + \ldots + A_p) \quad i = 1, \ldots, p-1.
+\end{equation}
+Equation \ref{eq31} applies to this specification too. Hence, the $\Pi$  matrix is the same as in the first specification. However, the $\Gamma_i$ matrices now differ, in the sense that they measure transitory effects. Therefore this specification is signified by transitory form.\\
+\par
+With function \texttt{vec2var()} a VECM (\emph{i.e} an object of formal class \texttt{ca.jo}, generated by \texttt{ca.jo()}) is transormed into its level VAR representation. For illustration purposes, an example taken from \citeasnoun{JOH1990} is used in the following.
+%
+<<vecm, echo = TRUE, fig = FALSE>>=
+library(urca)
+data(finland)
+sjf <- finland
+sjf.vecm <- ca.jo(sjf, constant = FALSE, type = "eigen", K = 2,
+spec = "longrun", season = 4, ctable = "A2")
+summary(sjf.vecm)
+@ 
+%
+One can conclude that two cointegration relationships do exist. The cointegrating rank is needed for the above transformation with function \texttt{vec2var}. Given the object \texttt{sjf.vecm} of class \texttt{ca.jo} with $r = 2$, one can now swiftly proceed:
+<<vec2var, echo = TRUE, fig = FALSE>>=
+args(vec2var)
+sjf.var <- vec2var(sjf.vecm, r = 2)
+sjf.var
+@ 
+%
+The \texttt{print} method does return the coefficient values, first for the lagged endogenous variables, next for the deterministic regressors. The returned object is of class \texttt{vec2var} and this list has the following elements:
+%
+<<vec2var2, echo = TRUE, fig = FALSE>>=
+names(sjf.var)
+class(sjf.var)
+methods(class = "vec2var")
+@
+%
+The object has assigned class attribute \texttt{vec2var} and a \texttt{print}- , \texttt{irf}-, \texttt{fevd}-, \texttt{predict}-, \texttt{Phi} and \texttt{Psi}-method do exist. Furthermore, the functions \texttt{arch()}, \texttt{normality()}, \texttt{serial()} and \texttt{fanchart()} can be employed for further analysis too.\footnote{The reader is referred to the previous sections in which these methods and functions are outlined.} 
+%  
 %
 \listoftables
 %

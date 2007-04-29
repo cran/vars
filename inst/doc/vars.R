@@ -2,6 +2,7 @@
 ### chunk number 1: preliminaries
 ###################################################
 library(vars)
+library(urca)
 library(xtable)
 
 
@@ -146,7 +147,16 @@ B(var2c.man)
 
 
 ###################################################
-### chunk number 17: diag1
+### chunk number 17: diag0
+###################################################
+args(arch)
+var2c.arch <- arch(var.2c)
+names(var2c.arch)
+var2c.arch
+
+
+###################################################
+### chunk number 18: diag1
 ###################################################
 var2c.norm <- normality(var.2c)
 names(var2c.norm)
@@ -155,7 +165,7 @@ plot(var2c.norm)
 
 
 ###################################################
-### chunk number 18: diag2
+### chunk number 19: diag2
 ###################################################
 var2c.serial <- serial(var.2c, lags.pt = 16, lags.bg = 5)
 names(var2c.serial)
@@ -164,14 +174,14 @@ plot(var2c.serial)
 
 
 ###################################################
-### chunk number 19: diag3
+### chunk number 20: diag3
 ###################################################
 var2c.serial$LMh
 var2c.serial$LMFh
 
 
 ###################################################
-### chunk number 20: diag4
+### chunk number 21: diag4
 ###################################################
 args(stability)
 var2c.stab <- stability(var.2c, type = "OLS-CUSUM")
@@ -180,43 +190,43 @@ plot(var2c.stab)
 
 
 ###################################################
-### chunk number 21: 
+### chunk number 22: 
 ###################################################
 plot(var2c.stab$stability$e)
 
 
 ###################################################
-### chunk number 22: 
+### chunk number 23: 
 ###################################################
 plot(var2c.stab$stability$prod)
 
 
 ###################################################
-### chunk number 23: 
+### chunk number 24: 
 ###################################################
 plot(var2c.stab$stability$rw)
 
 
 ###################################################
-### chunk number 24: 
+### chunk number 25: 
 ###################################################
 plot(var2c.stab$stability$U)
 
 
 ###################################################
-### chunk number 25: cause1
+### chunk number 26: cause1
 ###################################################
 args(causality)
 
 
 ###################################################
-### chunk number 26: cause2
+### chunk number 27: cause2
 ###################################################
 causality(var.2c, cause = c("rw", "prod"))
 
 
 ###################################################
-### chunk number 27: predict1
+### chunk number 28: predict1
 ###################################################
 var.f10 <- predict(var.2c, n.ahead = 10, ci = 0.95)
 names(var.f10)
@@ -226,13 +236,13 @@ fanchart(var.f10)
 
 
 ###################################################
-### chunk number 28: fanchart1
+### chunk number 29: fanchart1
 ###################################################
 args(fanchart)
 
 
 ###################################################
-### chunk number 29: 
+### chunk number 30: 
 ###################################################
 smpl <- nrow(var.f10$endog)
 ynames <- colnames(var.f10$endog)
@@ -250,7 +260,7 @@ abline(v = smpl, col = "grey", lty = 4)
 
 
 ###################################################
-### chunk number 30: 
+### chunk number 31: 
 ###################################################
 colors <- heat.colors(9)
 cis <- seq(0.1, 0.9, by = 0.1)
@@ -280,7 +290,7 @@ for(l in 2:n.regions){
 
 
 ###################################################
-### chunk number 31: irf1
+### chunk number 32: irf1
 ###################################################
 args(irf)
 Canada2 <- Canada[, c(3, 1, 4, 2)]
@@ -292,19 +302,19 @@ plot(irf.rw.eU)
 
 
 ###################################################
-### chunk number 32: 
+### chunk number 33: 
 ###################################################
 plot(irf.rw.eU)
 
 
 ###################################################
-### chunk number 33: fevd1
+### chunk number 34: fevd1
 ###################################################
 args(fevd)
 
 
 ###################################################
-### chunk number 34: fevd2
+### chunk number 35: fevd2
 ###################################################
 var2c.fevd <- fevd(var.2c, n.ahead = 5)
 class(var2c.fevd)
@@ -313,14 +323,14 @@ var2c.fevd$e
 
 
 ###################################################
-### chunk number 35: fevd3
+### chunk number 36: fevd3
 ###################################################
 barplot(t(var2c.fevd[[1]]), main = paste("FEVD for", names(var2c.fevd)[1]), col = palette()[1 : 4], ylab = "Percentage", xlab = "Horizon", names.arg = paste(1 : nrow(var2c.fevd[[1]])), ylim = c(0, 1.2))
 legend("top", legend = names(var2c.fevd), fill = palette()[1 : 4], ncol = 4)
 
 
 ###################################################
-### chunk number 36: SVAR1
+### chunk number 37: SVAR1
 ###################################################
 args(SVAR)
 amat <- diag(4)
@@ -333,7 +343,7 @@ amat
 
 
 ###################################################
-### chunk number 37: SVAR2
+### chunk number 38: SVAR2
 ###################################################
 args(optim)
 svar2c.A <- SVAR(var.2c, Amat = amat, Bmat = NULL, hessian = TRUE, method = "BFGS")
@@ -341,36 +351,63 @@ svar2c.A
 
 
 ###################################################
-### chunk number 38: SVAR3
+### chunk number 39: SVAR3
 ###################################################
 class(svar2c.A)
 names(svar2c.A)
 
 
 ###################################################
-### chunk number 39: svar-bq
+### chunk number 40: svar-bq
 ###################################################
 BQ(var.2c)
 
 
 ###################################################
-### chunk number 40: svar-irf1
+### chunk number 41: svar-irf1
 ###################################################
 svar2cA.ira <- irf(svar2c.A, impulse = "rw", response = c("e", "U"), boot = FALSE)
 svar2cA.ira
 
 
 ###################################################
-### chunk number 41: fevd-svar
+### chunk number 42: fevd-svar
 ###################################################
 svar2cA.fevd <- fevd(svar2c.A , n.ahead = 8)
 plot(svar2cA.fevd)
 
 
 ###################################################
-### chunk number 42: fevd-svar-fig
+### chunk number 43: fevd-svar-fig
 ###################################################
 barplot(t(svar2cA.fevd[[3]]), main = paste("FEVD for", names(svar2cA.fevd)[3]), col = palette()[1 : 4], ylab = "Percentage", xlab = "Horizon", names.arg = paste(1 : nrow(svar2cA.fevd[[3]])), ylim = c(0, 1.2))
 legend("top", legend = names(svar2cA.fevd), fill = palette()[1 : 4], ncol = 4)
+
+
+###################################################
+### chunk number 44: vecm
+###################################################
+library(urca)
+data(finland)
+sjf <- finland
+sjf.vecm <- ca.jo(sjf, constant = FALSE, type = "eigen", K = 2,
+spec = "longrun", season = 4, ctable = "A2")
+summary(sjf.vecm)
+
+
+###################################################
+### chunk number 45: vec2var
+###################################################
+args(vec2var)
+sjf.var <- vec2var(sjf.vecm, r = 2)
+sjf.var
+
+
+###################################################
+### chunk number 46: vec2var2
+###################################################
+names(sjf.var)
+class(sjf.var)
+methods(class = "vec2var")
 
 

@@ -60,12 +60,19 @@ vec2var(z, r = 1)
     Analysis}, Springer, New York.
 }
 
+\seealso{
+  \code{\link[urca]{ca.jo}}, \code{\link{predict}}, \code{\link{irf}},
+  \code{\link{fevd}}, \code{\link{Phi}}, \code{\link{Psi}},
+  \code{\link{normality}}, \code{\link{arch}}, \code{\link{serial}}
+}
+
 \examples{
 \dontrun{
 library(urca)
 data(finland)
 sjf <- finland
-sjf.vecm <- ca.jo(sjf, constant = FALSE, type = "eigen", K = 2, spec = "longrun", season = 4, ctable = "A2")
+sjf.vecm <- ca.jo(sjf, constant = FALSE, type = "eigen", K = 2,
+spec = "longrun", season = 4, ctable = "A2")
 vec2var(sjf.vecm, r = 2)
 }
 }
