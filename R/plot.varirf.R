@@ -7,7 +7,7 @@ function(x, ...){
     for(j in 1 : idx2){
       limit1 <- min(c(x$irf[[i]][, j], x$Lower[[i]][, j], x$Upper[[i]][, j]))
       limit2 <- max(c(x$irf[[i]][, j], x$Lower[[i]][, j], x$Upper[[i]][, j]))
-      if(x$model == "varest"){
+      if((x$model == "varest") || (x$model == "vec2var")){
         if(x$ortho){
           text <- paste("Orthogonal Impulse Response from", x$impulse[i], "to", x$response[j], sep = " ")
         } else {
