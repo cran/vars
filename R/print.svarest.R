@@ -14,16 +14,22 @@ function(x, ...){
     print(x$LRIM)
     invisible(x)
   } else {
+    if(!is.null(x$LR)){
+      cat("\nLR overidentification test:\n")
+      print(x$LR)
+    }
     cat("\nEstimated A matrix:\n")
     print(x$A)
-    cat("\nEstimated standard errors for A matrix:\n")
-    print(x$Ase)
+    if(!is.null(x$Ase)){
+      cat("\nEstimated standard errors for A matrix:\n")
+      print(x$Ase)
+    }
     cat("\nEstimated B matrix:\n")
     print(x$B)
-    cat("\nEstimated standard errors for B matrix:\n")
-    print(x$Bse)
-    cat("\nLR overidentification test:\n")
-    print(x$LR)
+    if(!is.null(x$Bse)){
+      cat("\nEstimated standard errors for B matrix:\n")
+      print(x$Bse)
+    }
     invisible(x)
   }
 }

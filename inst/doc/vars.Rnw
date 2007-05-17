@@ -725,7 +725,25 @@ Depending on the imposed restrictions, three types of SVAR- models can be distin
 \subsection{Estimation}
 \label{subsec:svar-est}
 %
-A SVAR model is estimated with the function \texttt{SVAR()}. Its arguments are shown in the R-code example below. An object with class attribute \texttt{varest} has to be provided as argument \texttt{x}. Whether an A-, B- or AB-model will be estimated, is dependent on the setting for \texttt{Amat} and \texttt{Bmat}. If a restriction matrix for \texttt{Amat} with dimension $(K \times K)$ is provided and the argument \texttt{Bmat} is left \texttt{NULL}, an A-model be estimated. In this case \texttt{Bmat} is set to an identity matrix $I_K$. Alternatively, if only a matrix object for \texttt{Bmat} is provided and \texttt{Amat} left unchanged, then a B-model will be estimated and internally \texttt{Amat} is set to an identity matrix $I_K$. Finally, if matrix objects for both arguments are provided, then an AB-model will be estimated. In all cases, the matrix elements to be estimated are marked by \texttt{NA} entries at the relevant positions.
+A SVAR model is estimated with the function
+\texttt{SVAR()}.\footnote{The exhibition is confined to the function
+  \texttt{SVAR()}. Incidentally, with function \texttt{SVAR2()} a SVAR
+  model can estimated too, thereby a scoring algorithm as suggested by
+  \citeasnoun{AMI97} is utilised.} Its arguments are shown in the
+R-code example below. An object with class attribute \texttt{varest}
+has to be provided as argument \texttt{x}. Whether an A-, B- or
+AB-model will be estimated, is dependent on the setting for
+\texttt{Amat} and \texttt{Bmat}. If a restriction matrix for
+\texttt{Amat} with dimension $(K \times K)$ is provided and the
+argument \texttt{Bmat} is left \texttt{NULL}, an A-model be
+estimated. In this case \texttt{Bmat} is set to an identity matrix
+$I_K$. Alternatively, if only a matrix object for \texttt{Bmat} is
+provided and \texttt{Amat} left unchanged, then a B-model will be
+estimated and internally \texttt{Amat} is set to an identity matrix
+$I_K$. Finally, if matrix objects for both arguments are provided,
+then an AB-model will be estimated. In all cases, the matrix elements
+to be estimated are marked by \texttt{NA} entries at the relevant
+positions. 
 %
 <<SVAR1, echo = TRUE>>=
 args(SVAR)
@@ -908,7 +926,16 @@ class(sjf.var)
 methods(class = "vec2var")
 @
 %
-The object has assigned class attribute \texttt{vec2var} and a \texttt{print}- , \texttt{irf}-, \texttt{fevd}-, \texttt{predict}-, \texttt{Phi} and \texttt{Psi}-method do exist. Furthermore, the functions \texttt{arch()}, \texttt{normality()}, \texttt{serial()} and \texttt{fanchart()} can be employed for further analysis too.\footnote{The reader is referred to the previous sections in which these methods and functions are outlined.} 
+The object has assigned class attribute \texttt{vec2var} and a \texttt{print}- , \texttt{irf}-, \texttt{fevd}-, \texttt{predict}-, \texttt{Phi} and \texttt{Psi}-method do exist. Furthermore, the functions \texttt{arch()}, \texttt{normality()}, \texttt{serial()} and \texttt{fanchart()} can be employed for further analysis too.\footnote{The reader is referred to the previous sections in which these methods and functions are outlined.}\\
+\par
+Finally, structural vector error correction models can be estimated
+with the function \texttt{SVEC()}. Likewise to the function
+\texttt{SVAR2()} a scoring algorithm is utilised for determining the
+coefficients of the long run and contemporaneous impact matrices. The
+estimated standard errors of these parameters can be calculated by a
+bootstrapping procedure. The latter is controlled by the functional
+argument \texttt{boot} in \texttt{SVEC}; its default value is
+\texttt{FALSE}.   
 %  
 %
 \listoftables

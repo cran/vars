@@ -399,4 +399,85 @@ function(x, K, obs, lags.bg, obj.name, resids){
   class(LMFh) <- "htest"
   return(list(LMh = LMh, LMFh = LMFh))
 }
+## Bootstrapping SVEC
+.bootsvec <- function(x, LRorig, SRorig, r, runs, K, conv.crit, maxls, max.iter){
+  ##
+  ## Obtaining level-VAR
+  ##
+  varlevel <- vec2var(x, r = r)
+  Resids <- varlevel$resid
+  obs <- varlevel$obs
+  totobs <- varlevel$totobs 
+  P <- totobs - obs
+  ##
+  ## Fixing beta
+  ##
+  betafix <- matrix(x@V[, 1:r], ncol = r)
+  ##
+  ## Computing the coefficient matrix
+  ##
+  coeffmat <- cbind(varlevel$deterministic, matrix(unlist(varlevel$A), nrow = K))
+  ##
+  ## Initialising the BOOT matrix, the sampled y 
+  ## and the deterministic regressors
+  ##
+  BOOT <- matrix(0, nrow = 2*K^2, ncol = runs)
+  ysampled <- matrix(0, nrow = totobs, ncol = K)
+  Zdet <- varlevel$datamat[, -c(1:K)]
+  nrhs <- ncol(Zdet)
+  ndet <- nrhs - K*P
+  Zdet <- matrix(Zdet[, 1:ndet], nrow = obs, ncol = ndet)
+  ##
+  ## Conducting the Bootstrap
+  ##
+  for(i in 1:runs){
+    ##
+    ## Sampling of the residuals
+    ##
+    booted <- sample(c(1 : obs), replace=TRUE)
+    resid <- Resids[booted, ]
+    ##
+    ## Setting the starting values for y
+    ##
+    lasty <- c(t(varlevel$y[P : 1, ]))
+    ysampled[c(1 : P), ] <- varlevel$y[c(1 : P), ]
+    for(j in 1 : obs){
+      lasty <- lasty[1 : (K * P)]
+      Z <- c(Zdet[j, ], lasty)
+      ysampled[j + P, ] <- coeffmat %*% Z + resid[j, ]
+      lasty <- c(ysampled[j + P, ], lasty) 
+    }
+    colnames(ysampled) <- colnames(x@x)
+    ##
+    ## Re-estimating the VECM
+    ##
+    ifelse(is.null(x@call$K), Korig <- 2, Korig <- x@call$K)
+    ifelse(is.null(x@call$spec), specorig <- "longrun", specorig <- x@call$spec)
+    if(is.null(x@call$season)){
+      seasonorig <- NULL
+    }else {
+      seasonorig <- x@call$season
+    }
+    if(is.null(x@call$dumvar)){
+      dumvarorig <- NULL
+    }else {
+      dumvarorig <- x@call$dumvar
+    }
+    ifelse(is.null(x@call$constant), constantorig <- FALSE, constantorig <- x@call$constant)    
+    vecm <- ca.jo(x = ysampled, K = Korig, spec = specorig, season = seasonorig, dumvar = dumvarorig, constant = constantorig)
+    vecm@V <- betafix
+    ##
+    ## Re-estimating the SVEC
+    ##
+    svec <- SVEC(x = vecm, LR = LRorig, SR = SRorig, r = r, max.iter = max.iter, conv.crit = conv.crit, maxls = maxls, boot = FALSE, lrtest = FALSE)
+    SRboot <- c(svec$SR)
+    LRboot <- c(svec$LR)
+    bootvals <- c(SRboot, LRboot)
+    ##
+    ## Storing the parameters in BOOT
+    ##
+    BOOT[, i] <- bootvals
+  }
+  return(BOOT)
+}
 
