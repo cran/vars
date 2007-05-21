@@ -15,8 +15,8 @@ function(x, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
   ## Retrieval of A in matrix (whole)
   Zdet <- matrix(rep(1, n.ahead), nrow = n.ahead, ncol = 1)
   rownames(Zdet) <- seq(nrow(data.all) + 1, length = n.ahead)
-  if(!is.null(eval(x$vecm@call$season))){
-    season <- eval(x$vecm@call$season)
+  if(!is.null(eval(x$vecm@season))){
+    season <- eval(x$vecm@season)
     seas.names <- paste("sd", 1:(season-1), sep = "")
     cycle <- tail(data.all[, seas.names], season)
     seasonal <- matrix(cycle, nrow = season, ncol = season - 1)
@@ -31,19 +31,21 @@ function(x, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
     rownames(seasonal) <- seq(nrow(data.all) + 1, length = n.ahead)
     Zdet <- cbind(Zdet, seasonal)
   }
-  if(!is.null(eval(x$vecm@call$dumvar))){
+  if(!is.null(eval(x$vecm@dumvar))){
     if(is.null(dumvar)){
       stop(paste("\nPlease, provide a matrix x for argument 'dumvar' with", n.ahead, "rows.\n", sep = " "))
     }
     if(!identical(nrow(dumvar), n.ahead)){
       stop("\nNumber of rows of 'dumvar' is not equal to 'n.ahead'.\n")
     }
-    if(!(colnames(dumvar) %in% colnames(B))){
+    testsum <- sum((colnames(dumvar) %in% colnames(B)))
+    if(!(testsum == ncol(dumvar))){
       stop("\nColumn names of 'dumvar' do not match with column names in 'x$datamat'.\n")
     }
     Zdet <- cbind(Zdet, dumvar)
-  }  
-  Zy <- subset(data.all, select = !(colnames(data.all) == colnames(x$deterministic)))[, 1:(x$K * x$p)] 
+  }
+  exogen.cols <- which(colnames(data.all) %in% colnames(x$deterministic))
+  Zy <- data.all[, -exogen.cols] 
   yse <- matrix(NA, nrow = n.ahead, ncol = K)
   sig.y <- .fecovvec2var(x = x, n.ahead = n.ahead)
   for(i in 1 : n.ahead){

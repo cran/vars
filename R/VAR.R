@@ -3,6 +3,12 @@ function(y, p = 1, type = c("const", "trend", "both", "none")){
   y <- as.matrix(y)
   if (any(is.na(y)))
     stop("\nNAs in y.\n")
+  if(ncol(y) < 2)
+    stop("The matrix 'y' should contain at least two variables. For univariate analysis consider ar() and arima() in package stats.\n")
+  if(is.null(colnames(y))){
+    colnames(y) <- paste("y", 1:ncol(y), sep = "")
+    warning(paste("No columne names supplied in y, using:", paste(colnames(y), collapse = ", "), ", instead.\n"))
+  }
   colnames(y) <- make.names(colnames(y))
   y.orig <- y
   type <- match.arg(type)

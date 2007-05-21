@@ -48,6 +48,7 @@ vec2var(z, r = 1)
   \item{vecm}{The supplied object \code{z} of formal class \code{ca.jo}.}
   \item{datamat}{A dataframe with the used dataset.}
   \item{resid}{A matrix with the residuals from the empirical VAR(p).}
+  \item{r}{Intefer, the assigned co-integration rank from the call.}
 }
 
 \author{Bernhard Pfaff}

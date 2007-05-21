@@ -1,3 +1,23 @@
+2007-05-21   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/irf.vec2var.R: Bootstrapped CI implemented.
+	* R/irf.svecest.R: Bootstrapped CI implemented.
+	* R/vec2var.R: Use of z@season for obtaining seasonality, instead
+	of call. 
+	* R/SVEC.R ("SVEC"): 'LRorig', 'SRorig' and 'r' included in returned
+	list object. 
+	* R/Phi.svecest.R ("Phi.svecest"): Changed call to vec2var:
+	varlevel <- vec2var(x$var, r = x$r)
+	* R/predict.vec2var.R: if-clause changed in season and dumvar checking.
+
+	
+2007-05-18   Dr. Bernhard Pfaff <bernhard@pfaffikus.de> 
+
+	* R/VAR.R: Checking for correctness of y inserted.
+	* R/Phi.svecest.R: Phi-method for svecest implemented.
+	* R/fevd.svecest.R: FEVD method for svecest implemented.
+	* R/irf.svecest.R: IRF method for svecest implemented (no boot).
+	
 2007-05-16   Dr. Bernhard Pfaff <bernhard@pfaffikus.de> 
 
 	* R/SVEC.R: Bootstrap standard errors included.
@@ -29,7 +49,7 @@
 	formal class ca.jo) to VAR inserted. Added to NAMESPACE. 
 	* R/Phi.vec2var.R: Method 'Phi' for 'vec2var' objects.
 	* R/Psi.vec2var.R: Method 'Psi' for 'vec2var' objects.
-	* R/irf.vec2var.R: Method 'irf' for 'vec2var' objects. 
+	* R/irf.vec2var.R: Method 'irf' for 'vec2var' objects (no boot). 
 	Internal functions .boot and .irf modified.	
 	* R/fevd.vec2var.R: Method 'fevd' for 'vec2var' objects. 
 	Internal functions .fecovvec2var inserted.

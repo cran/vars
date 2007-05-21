@@ -107,6 +107,9 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
   \item{start}{Vector of used starting values.}
   \item{type}{Character, type of the SVEC-model.}
   \item{var}{The \sQuote{\code{ca.jo}} object \sQuote{\code{x}}.} 
+  \item{LRorig}{The supplied long run impact matrix.}
+  \item{SRorig}{The supplied contemporaneous impact matrix.}
+  \item{r}{Integer, the supplied cointegration rank.}
   \item{call}{The \code{call} to \command{SVEC()}.}
 }
 

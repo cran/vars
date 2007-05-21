@@ -23,12 +23,12 @@ function(z, r = 1){
   }
   rownames(detcoeffs) <- "constant"
   colnames(detcoeffs) <- colnames(z@x)
-  if(!(is.null(eval(z@call$season)))){
-    seas <- eval(z@call$season) - 1
+  if(!(is.null(eval(z@season)))){
+    seas <- eval(z@season) - 1
     season <- paste("sd", 1:seas, sep = "")
     detcoeffs <- rbind(detcoeffs, coeffs[season, ])
   }
-  if(!(is.null(eval(z@call$dumvar)))){
+  if(!(is.null(eval(z@dumvar)))){
     dumnames <- colnames(z@dumvar)
     tmp <- rownames(detcoeffs)
     detcoeffs <- rbind(detcoeffs, coeffs[dumnames, ])
@@ -38,8 +38,7 @@ function(z, r = 1){
   Gamma <- t(coeffs[- which(rownames(coeffs) %in% c(colnames(detcoeffs), colnames(etc))), ])
   rownames(Gamma) <- colnames(z@x)
   A <- list()
-  spec <- match.arg(eval(z@call$spec), c("transitory", "longrun"))
-  if(identical(spec, "transitory")){
+  if(identical(z@spec, "transitory")){
     if(identical(z@lag, as.integer(2))){
       A$A1 <- Gamma + PI + diag(z@P)
       rownames(A$A1) <- colnames(z@x)
@@ -64,7 +63,7 @@ function(z, r = 1){
       names(A) <- paste("A", 1:z@lag, sep = "")
     }    
   }
-  if(identical(spec, "longrun")){
+  if(identical(z@spec, "longrun")){
     if(identical(z@lag, as.integer(2))){
       A$A1 <- Gamma + diag(z@P)
       rownames(A$A1) <- colnames(z@x)
@@ -102,7 +101,7 @@ function(z, r = 1){
     resids <- resids - datamat[, colnames(A[[i]])] %*% t(A[[i]])
   }
   colnames(resids) <- paste("resids of", colnames(z@x))
-  result <- list(deterministic = detcoeffs, A = A, p = z@lag, K = ncol(z@x), y = z@x, obs = nrow(z@Z0), totobs = nrow(z@x), call = match.call(), vecm = z, datamat = datamat, resid = resids)
+  result <- list(deterministic = detcoeffs, A = A, p = z@lag, K = ncol(z@x), y = z@x, obs = nrow(z@Z0), totobs = nrow(z@x), call = match.call(), vecm = z, datamat = datamat, resid = resids, r = r)
   class(result) <- "vec2var"
   return(result)   
 }

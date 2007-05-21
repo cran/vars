@@ -225,7 +225,7 @@ function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit
   ##
   ## Assembling svecest object
   ##
-  result <- list(SR = SR, SRse = SRse, LR = LR, LRse = LRse, Sigma.U = Sigma.U * 100, Restrictions = c(nResC1, nResB), LRover = LRover, start = start, type = svartype, var = x, call = match.call())
+  result <- list(SR = SR, SRse = SRse, LR = LR, LRse = LRse, Sigma.U = Sigma.U * 100, Restrictions = c(nResC1, nResB), LRover = LRover, start = start, type = svartype, var = x, LRorig = LRorig, SRorig = SRorig, r = r, call = match.call())
   class(result) <- "svecest"
   return(result)
 }
