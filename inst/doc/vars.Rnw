@@ -344,7 +344,7 @@ The Portmanteau statistic is defined as:
 Q_h = T \sum_{j=1}^h tr(\hat{C}_j'\hat{C}_0^{-1}\hat{C}_j\hat{C}_0^{-1}) \; ,
 \end{equation}
 %
-with $\hat{C}_i = \frac{1}{T}\Sigma_{t=i+1}^T \hat{\mathbf{u}}_t \hat{\mathbf{u}}_{t-i}'$. The test statistic has an approximate $\chi^2(K^2h-n^*)$ distribution, and $n^*$ is the number of coefficients excluding deterministic terms of a VAR(p). The limiting distribution is only valid for $h$ tending to infinity at suitable rate with growing sample size. Hence, the trade-off is between a decent approximation to the $\chi^2$ distrubution and a loss in power of the test, when $h$ is choosen too large. The small sample properties of the test statistic:
+with $\hat{C}_i = \frac{1}{T}\Sigma_{t=i+1}^T \hat{\mathbf{u}}_t \hat{\mathbf{u}}_{t-i}'$. The test statistic has an approximate $\chi^2(K^2h-n^*)$ distribution, and $n^*$ is the number of coefficients excluding deterministic terms of a VAR(p). The limiting distribution is only valid for $h$ tending to infinity at suitable rate with growing sample size. Hence, the trade-off is between a decent approximation to the $\chi^2$ distribution and a loss in power of the test, when $h$ is choosen too large. The small sample properties of the test statistic:
 %
 \begin{equation}
 Q_h^* = T^2 \sum_{j=1}^h \frac{1}{T-j} tr(\hat{C}_j'\hat{C}_0^{-1}\hat{C}_j\hat{C}_0^{-1})

@@ -1,6 +1,8 @@
 (TeX-add-style-hook "vars"
- (lambda ()
-    (LaTeX-add-bibliographies)
+ (function
+  (lambda ()
+    (LaTeX-add-bibliographies
+     "vars")
     (LaTeX-add-labels
      "sec:intro"
      "sec:var"
@@ -56,5 +58,5 @@
      "latex2e"
      "art10"
      "article"
-     "a4paper")))
+     "a4paper"))))
 

@@ -2,6 +2,8 @@
 
 \alias{plot.varprd}
 
+\encoding{latin1}
+
 \title{Plot method for objects of class varprd}
 
 \description{

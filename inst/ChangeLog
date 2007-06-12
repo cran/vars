@@ -1,3 +1,8 @@
+2007-06-12   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* man/plot.varprd.Rd: \encoding{latin1} inserted.
+	* man/roots.Rd: \encoding{latin1} inserted.
+
 2007-05-21   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/irf.vec2var.R: Bootstrapped CI implemented.

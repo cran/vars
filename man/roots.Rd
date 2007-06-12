@@ -2,6 +2,8 @@
 
 \alias{roots}
 
+\encoding{latin1}
+
 \title{Eigenvalues of the companion coefficient matrix of a VAR(p)-process}
 
 \description{
