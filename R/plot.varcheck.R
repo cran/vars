@@ -2,6 +2,7 @@
 function(x, ...){
   K <- ncol(x$resid)
   resids <- x$resid
+  op <- par(no.readonly = TRUE)
   for(i in 1 : K){
     layout(matrix(c(1, 2, 3, 4, 5, 6), nrow=3, ncol=2, byrow=TRUE))
     plot.ts(resids[, i], main = paste("Diagram of fit for", colnames(resids)[i], "residuals", sep=" "), ylim = c(min(resids[, i]), max(resids[, i])), ylab = "", lty = 1)
@@ -17,4 +18,5 @@ function(x, ...){
       readline()
     }
   }
+  par(op)
 }

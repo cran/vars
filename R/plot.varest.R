@@ -2,6 +2,7 @@
 function(x, ...){
   x.sum <- summary(x)
   K <- x$K
+  op <- par(no.readonly = TRUE)
   for(i in 1 : K){
     layout(matrix(c(1, 1, 2, 2, 3, 4), nrow = 3, ncol = 2, byrow = TRUE))
     plot.ts(x$datamat[, i], main = paste("Diagram of fit for", colnames(x$datamat)[i], sep=" "), ylim = c(min(c(x$datamat[, i], x$varresult[[i]]$fitted.values)), max(c(x$datamat[, i], x$varresult[[i]]$fitted.values))), ylab = "", lty = 1)
@@ -15,4 +16,5 @@ function(x, ...){
       readline()
     }
   }
+  par(op) 
 }

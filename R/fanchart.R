@@ -23,6 +23,7 @@ function(x, colors = NULL, cis = NULL){
   }
   xx <- seq(e.sample, length.out = n.ahead + 1)
   xx <- c(xx, rev(xx))
+  op <- par(no.readonly = TRUE)
   for(i in 1 : K){
     ymax <- max(c(fcst[[n.regions]][i][[1]][, 3]), endog[, i])
     ymin <- min(c(fcst[[n.regions]][i][[1]][, 2]), endog[, i])
@@ -42,4 +43,5 @@ function(x, colors = NULL, cis = NULL){
       readline()
     }
   }
+  par(op)
 }

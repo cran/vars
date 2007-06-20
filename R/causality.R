@@ -57,7 +57,7 @@ function(x, cause = NULL){
   names(PARAMETER1) <- "df1"
   names(PARAMETER2) <- "df2"  
   PVAL <- 1 - pf(STATISTIC, PARAMETER1, PARAMETER2)
-  METHOD <- paste("Granger causality:", paste(y1.names, collapse=" "), "do not Granger-cause", paste(y2.names, collapse=" "))
+  METHOD <- paste("Granger causality H0:", paste(y1.names, collapse=" "), "do not Granger-cause", paste(y2.names, collapse=" "))
   result1 <- list(statistic = STATISTIC, parameter = c(PARAMETER1, PARAMETER2), p.value = PVAL, method = METHOD, data.name = paste("VAR object", obj.name))
   class(result1) <- "htest"
   sigma.u <- crossprod(x$resid) / (obs - ncol(Z))

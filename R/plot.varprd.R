@@ -3,6 +3,7 @@ function(x, ...){
   K <- ncol(x$endog)
   smpl <- nrow(x$endog)
   ynames <- colnames(x$endog)
+  op <- par(no.readonly = TRUE)
   for(i in 1 : K){
     fcsty <- c(rep(NA, smpl - 1), x$endog[smpl, i], x$fcst[[i]][, 1])
     fcstl <- c(rep(NA, smpl - 1), x$endog[smpl, i], x$fcst[[i]][, 2])
@@ -20,4 +21,5 @@ function(x, ...){
       readline()
     }
   }
+  par(op)
 }

@@ -1,3 +1,10 @@
+2007-06-20   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/causality.R ("causality"): Changed wording in METHOD for
+	Granger causality.
+	* R/plot.***.R and fanchart(): op <- par(no.readonly = TRUE) and
+	par(op) inserted  
+	
 2007-06-12   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* man/plot.varprd.Rd: \encoding{latin1} inserted.

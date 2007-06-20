@@ -2,6 +2,7 @@
 function(x, ...){
   idx1 <- length(x$impulse)
   idx2 <- length(x$response)
+  op <- par(no.readonly = TRUE)
   for(i in 1 : idx1){
     layout(matrix(1 : idx2, nrow = idx2, ncol = 1))
     for(j in 1 : idx2){
@@ -32,4 +33,5 @@ function(x, ...){
       }
     }
   }
+  par(op)
 }
