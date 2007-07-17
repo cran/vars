@@ -17,6 +17,9 @@ function(x, ...){
       } else if(x$model == "svarest"){
         text <- paste("SVAR Impulse Response from", x$impulse[i], "to", x$response[j], sep = " ")
       }
+      else if (x$model == "svecest") {
+        text <- paste("SVECM Impulse Response from", x$impulse[i], "to", x$response[j], sep = " ")
+      }
       if(x$cumulative) text <- paste(text, "(cumulative)", sep=" ")
       plot.ts(x$irf[[i]][, j], ylab = "", xlab = "", ylim = c(limit1, limit2), main = text)
       abline(h = 0, col = "gray")

@@ -1,3 +1,26 @@
+2007-07-17   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* NAMESPACE: Removed predict. Included fitted.varest, coef.varest
+	and residuals.varest as S3-methods. 
+	* R/fitted.varest.R ("fitted.varest"): fitted-method applied to
+	varresult list element implemented. 
+	* R/coef.varest.R ("coef.varest"): coefficient-method applied to
+	varresult list element implemented. 
+	* R/residuals.varest.R ("residuals.varest"): residuals-method
+	applied to varresult list element implemented. 
+	
+2007-07-13   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varirf.R ("plot.varirf"): x$model for SVECM included in
+	if-else clause.
+	* R/predict.R: Removed predict-function.  
+	* R/predict.varest.R ("predict.varest"): Changed argument 'x' to
+	'object'. 
+	* R/predict.vec2var.R ("predict.vec2var"): Changed argument 'x' to
+	'object'. 
+	* man/predict.Rd: Replaced argument 'x' with 'object'.
+	* man/irf.Rd (cumulative): Fixed default value to FALSE. 
+
 2007-06-20   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/causality.R ("causality"): Changed wording in METHOD for

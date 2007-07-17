@@ -1,10 +1,13 @@
-export(A, arch, B, BQ, causality, fanchart, fevd, irf, normality, Phi, Psi, predict, restrict, roots, serial, stability, SVAR, SVAR2, SVEC, VAR, VARselect, vec2var)
+export(A, arch, B, BQ, causality, fanchart, fevd, irf, normality, Phi, Psi, restrict, roots, serial, stability, SVAR, SVAR2, SVEC, VAR, VARselect, vec2var)
 
+S3method(coef, varest)
 
 S3method(fevd, varest)
 S3method(fevd, svarest)
 S3method(fevd, svecest)
 S3method(fevd, vec2var)
+
+S3method(fitted, varest)
 
 S3method(irf, varest)
 S3method(irf, svarest)
@@ -39,6 +42,8 @@ S3method(plot, varstabil)
 
 S3method(predict, varest)
 S3method(predict, vec2var)
+
+S3method(residuals, varest)
 
 S3method(summary, varest)
 

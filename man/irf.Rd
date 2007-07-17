@@ -50,8 +50,8 @@ runs = 100, seed = NULL, ...)
   \item{ortho}{Logical, if \code{TRUE} (the default) the orthogonalised impulse
     response coefficients are computed (only for objects of class
     \sQuote{\code{varest}}).}    
-  \item{cumulative}{Logical, if \code{TRUE} (the default) the cumulated impulse
-    response coefficients are computed.}  
+  \item{cumulative}{Logical, if \code{TRUE} the cumulated
+    impulse response coefficients are computed. The default value is false.}  
   \item{boot}{Logical, if \code{TRUE} (the default) bootstrapped error
     bands for the imuplse response coefficients are computed.}  
   \item{ci}{Numeric, the confidence interval for the bootstrapped errors

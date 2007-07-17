@@ -1,13 +1,13 @@
 "predict.varest" <-
-function(x, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
-  K <- x$K
-  p <- x$p
-  obs <- x$obs
-  type <- x$type
-  data.all <- x$datamat
-  ynames <- colnames(x$y)
-  Z <- x$datamat[, -c(1 : K)]
-  B <- B(x)
+function(object, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
+  K <- object$K
+  p <- object$p
+  obs <- object$obs
+  type <- object$type
+  data.all <- object$datamat
+  ynames <- colnames(object$y)
+  Z <- object$datamat[, -c(1 : K)]
+  B <- B(object)
   ## Deterministic and lagged y's
   ## Retrieval of A in matrix (whole)
   if(type == "const"){
@@ -26,7 +26,7 @@ function(x, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
       Zy <- as.matrix(data.all)
     }
   yse <- matrix(NA, nrow = n.ahead, ncol = K)
-  sig.y <- .fecov(x = x, n.ahead = n.ahead)
+  sig.y <- .fecov(x = object, n.ahead = n.ahead)
   for(i in 1 : n.ahead){
     yse[i, ] <- sqrt(diag(sig.y[, , i]))
   }
@@ -53,7 +53,7 @@ function(x, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
     colnames(forecasts[[i]]) <- c("fcst", "lower", "upper", "CI")
   }
   names(forecasts) <- ynames
-  result <- list(fcst = forecasts, endog = x$y, model = x) 
+  result <- list(fcst = forecasts, endog = object$y, model = object) 
   class(result) <- "varprd"
   return(result)
 }
