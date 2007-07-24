@@ -1,4 +1,6 @@
-\name{summary.varest}
+\name{summary}
+
+\alias{summary}
 
 \alias{summary.varest}
 

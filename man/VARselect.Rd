@@ -13,7 +13,8 @@
 }
 
 \usage{
-VARselect(y, lag.max = 10, type = c("const", "trend", "both", "none"))
+VARselect(y, lag.max = 10, type = c("const", "trend", "both", "none"),
+season = NULL, exogen = NULL)
 }
 
 \arguments{
@@ -21,6 +22,10 @@ VARselect(y, lag.max = 10, type = c("const", "trend", "both", "none"))
   \item{lag.max}{Integer for the highest lag order (default is
     \code{lag.max = 10}).}
   \item{type}{Type of deterministic regressors to include.}
+  \item{season}{Inlusion of centered seasonal dummy variables (integer
+    value of frequency).}
+  \item{exogen}{Inlusion of exogenous variables.}
+  
 }
 
 \details{
@@ -28,16 +33,21 @@ VARselect(y, lag.max = 10, type = c("const", "trend", "both", "none"))
   form:
 
   \deqn{
-    \bold{y}_t = CD_t + A_1 \bold{y}_{t-1} + \ldots + A_p \bold{y}_{t-p} + \bold{u}_t
+    \bold{y}_t = A_1 \bold{y}_{t-1} + \ldots + A_p \bold{y}_{t-p} + CD_t
+    + \bold{u}_t
   }
 
   where \eqn{\bold{y}_t} is a \eqn{K \times 1} vector of endogenous
   variables and \eqn{u_t} assigns a spherical disturbance term of the
   same dimension. The coefficient matrices \eqn{A_1, \ldots, A_p} are of
   dimension \eqn{K \times K}. In addition, either a constant and/or a
-  trend can be included as deterministic regressors (term \eqn{CD_T}, by
-  setting the \code{type} argument to the corresponding value. The
-  default is \code{const}.\cr
+  trend can be included as deterministic regressors as well as centered
+  seasonal dummy variables and/or exogenous variables (term \eqn{CD_T}, by
+  setting the \code{type} argument to the corresponding value and/or
+  setting \code{season} to the desired frequency (integer) and/or providing a
+  matrix object for \code{exogen}, respectively. The default for \code{type} is
+  \code{const} and for \code{season} and \code{exogen} the default is
+  set to \code{NULL}.\cr
   Based on the same sample size the following information criteria and
   the final prediction error are computed:
   \deqn{
@@ -122,4 +132,4 @@ VARselect(Canada, lag.max = 5, type="const")
 \concept{Final Prediction Error}
 \concept{Akaike}
 \concept{Hannan-Quinn}
-\concept{Scharz}
+\concept{Schwarz}

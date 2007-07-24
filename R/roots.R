@@ -7,7 +7,7 @@ function(x, modulus = TRUE){
   p <- x$p
   A <- unlist(A(x))
   companion <- matrix(0, nrow = K * p, ncol = K * p)
-  companion[1:K, 1:(K*p)] <- A
+  companion[1:K, 1:(K * p)] <- A
   if(p > 1){
     j <- 0
     for( i in (K + 1) : (K*p)){

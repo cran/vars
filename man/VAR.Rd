@@ -13,13 +13,17 @@
 }
 
 \usage{
-VAR(y, p = 1, type = c("const", "trend", "both", "none"))
+VAR(y, p = 1, type = c("const", "trend", "both", "none"),
+season = NULL, exogen = NULL)
 }
 
 \arguments{
   \item{y}{Data item containing the endogenous variables}
   \item{p}{Integer for the lag order (default is p=1).}
   \item{type}{Type of deterministic regressors to include.}
+  \item{season}{Inlusion of centered seasonal dummy variables (integer
+    value of frequency).}
+  \item{exogen}{Inlusion of exogenous variables.}
 }
 
 \details{
@@ -27,16 +31,21 @@ VAR(y, p = 1, type = c("const", "trend", "both", "none"))
   form:
 
   \deqn{
-    \bold{y}_t = CD_t + A_1 \bold{y}_{t-1} + \ldots + A_p \bold{y}_{t-p} + \bold{u}_t
+    \bold{y}_t = A_1 \bold{y}_{t-1} + \ldots + A_p \bold{y}_{t-p} +
+    CD_t + \bold{u}_t
   }
 
   where \eqn{\bold{y}_t} is a \eqn{K \times 1} vector of endogenous
   variables and \eqn{u_t} assigns a spherical disturbance term of the
   same dimension. The coefficient matrices \eqn{A_1, \ldots, A_p} are of
   dimension \eqn{K \times K}. In addition, either a constant and/or a
-  trend can be included as deterministic regressors (term \eqn{CD_T}, by
-  setting the \code{type} argument to the corresponding value. The
-  default is \code{const}. 
+  trend can be included as deterministic regressors as well as centered
+  seasonal dummy variables and/or exogenous variables (term \eqn{CD_T}, by
+  setting the \code{type} argument to the corresponding value and/or
+  setting \code{season} to the desired frequency (integer) and/or providing a
+  matrix object for \code{exogen}, respectively. The default for \code{type} is
+  \code{const} and for \code{season} and \code{exogen} the default is
+  set to \code{NULL}. 
 }
 
 \value{
@@ -44,7 +53,6 @@ VAR(y, p = 1, type = c("const", "trend", "both", "none"))
   following elements:\cr
 
   \item{varresult}{list of \sQuote{\code{lm}} objects.}
-  \item{resid}{A matrix object of the residuals.}
   \item{datamat}{The data matrix of the endogenous and explanatory variables.}
   \item{y}{The data matrix of the endogenous variables}
   \item{type}{A character, specifying the deterministic regressors.}
@@ -69,9 +77,10 @@ VAR(y, p = 1, type = c("const", "trend", "both", "none"))
 
 \seealso{
   \code{\link{summary.varest}}, \code{\link{plot.varest}},
-  \code{\link{predict}}, \code{\link{irf}}, \code{\link{fevd}},
-  \code{\link{Phi}}, \code{\link{Psi}}, \code{\link{normality}},
-  \code{\link{arch}}, \code{\link{serial}}  
+  \code{\link{coef.varest}}, \code{\link{residuals.varest}},
+  \code{\link{fitted.varest}}, \code{\link{predict}}, \code{\link{irf}},
+  \code{\link{fevd}}, \code{\link{Phi}}, \code{\link{Psi}},
+  \code{\link{normality}}, \code{\link{arch}}, \code{\link{serial}}  
 }
 
 \examples{

@@ -29,7 +29,6 @@ function(x, method=c("ser", "manual"), thresh=2.0, resmat=NULL){
     for(i in 1 : K){
       temp <- ser(x$varresult[[i]], yendog[, i])
       x$varresult[[i]] <- temp[[1]]
-      x$resid[, i] <- resid(x$varresult[[i]])
       namessub <- colnames(temp[[2]])
       x$restrictions[i, namesall%in%namessub] <- 1 
     }
@@ -46,7 +45,6 @@ function(x, method=c("ser", "manual"), thresh=2.0, resmat=NULL){
       y <- yendog[, i]
       lmres <- lm(y ~ -1 + ., data=datares)
       x$varresult[[i]] <- lmres
-      x$resid[, i] <- resid(x$varresult[[i]])
     }
   }            
   return(x)

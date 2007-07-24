@@ -18,14 +18,11 @@ function(x, cause = NULL){
   y2.names <- subset(y.names, subset = !(y.names %in% cause))
   Z <- x$datamat[, -c(1 : K)]
   PI <- B(x)
-  if((type == "const") || (type == "trend")){
-    colnames(PI) <- c(colnames(PI)[1], rep(y.names, p))
-    detcoeff <- K
-  }else if(type=="both"){
-    colnames(PI) <- c(colnames(PI)[1 : 2], rep(y.names, p))
-    detcoeff <- 2 * K
-  } else if(type == "none"){
-    colnames(PI) <- rep(y.names, p)
+  if(ncol(PI) > K*p){
+    colnames(PI) <- c(rep(y.names, 2), colnames(PI)[(K*p + 1):ncol(PI)])
+    detcoeff <- length(PI) - K^2 * p
+  } else {
+    colnames(PI) <- rep(y.names, 2)
     detcoeff <- 0
   }
   rownames(PI) <- y.names
@@ -33,7 +30,7 @@ function(x, cause = NULL){
   temp <- matrix(1 : (K^2), nrow = K, ncol = K)
   colnames(temp) <- y.names
   rownames(temp) <- y.names
-  temp <- as.vector(temp[rownames(temp) %in% y2.names, colnames(temp) %in% y1.names ]) + detcoeff
+  temp <- as.vector(temp[rownames(temp) %in% y2.names, colnames(temp) %in% y1.names ])
   if(p > 1){
     tmp <- temp
     for(i in 1:(p-1)){
@@ -46,9 +43,12 @@ function(x, cause = NULL){
   for(i in 1 : N){
     R[i, temp[i]] <- 1
   }
-  sigma.u <- crossprod(x$resid) / (obs - ncol(Z))
+  ##
+  ## Granger-causality
+  ##
+  sigma.u <- crossprod(resid(x)) / (obs - ncol(Z))
   sigma.pi <- kronecker(solve(crossprod(as.matrix(Z))), sigma.u)
-  df1 <- N
+  df1 <- p * length(y1.names) * length(y2.names)
   df2 <- K * obs - K^2 * p - detcoeff
   STATISTIC <- t(R %*% PI.vec) %*% solve(R %*% sigma.pi %*% t(R)) %*% R %*% PI.vec / N
   names(STATISTIC) <- "F-Test"
@@ -60,11 +60,14 @@ function(x, cause = NULL){
   METHOD <- paste("Granger causality H0:", paste(y1.names, collapse=" "), "do not Granger-cause", paste(y2.names, collapse=" "))
   result1 <- list(statistic = STATISTIC, parameter = c(PARAMETER1, PARAMETER2), p.value = PVAL, method = METHOD, data.name = paste("VAR object", obj.name))
   class(result1) <- "htest"
-  sigma.u <- crossprod(x$resid) / (obs - ncol(Z))
+  ##
+  ## Instantaneous Causality
+  ##
+  sigma.u <- crossprod(resid(x)) / (obs - ncol(Z))
   colnames(sigma.u) <- y.names
   rownames(sigma.u) <- y.names
   select <- sigma.u[rownames(sigma.u) %in% y2.names, colnames(sigma.u) %in% y1.names ]
-  sig.vech <- sigma.u[lower.tri(sigma.u, diag=TRUE)]
+  sig.vech <- sigma.u[lower.tri(sigma.u, diag = TRUE)]
   index <- which(sig.vech %in% select)
   N <- length(index)
   Cmat <- matrix(0, nrow = N, ncol = length(sig.vech))
@@ -75,7 +78,7 @@ function(x, cause = NULL){
   Dinv <- ginv(Dmat)
   lambda.w <- obs %*% t(sig.vech) %*% t(Cmat) %*% solve(2 * Cmat %*% Dinv %*% kronecker(sigma.u, sigma.u) %*% t(Dinv) %*% t(Cmat)) %*% Cmat %*% sig.vech
   STATISTIC <- lambda.w
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   PARAMETER <- N
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, PARAMETER)

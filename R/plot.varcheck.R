@@ -4,6 +4,7 @@ function(x, ...){
   resids <- x$resid
   op <- par(no.readonly = TRUE)
   for(i in 1 : K){
+    par(ask = TRUE)
     layout(matrix(c(1, 2, 3, 4, 5, 6), nrow=3, ncol=2, byrow=TRUE))
     plot.ts(resids[, i], main = paste("Diagram of fit for", colnames(resids)[i], "residuals", sep=" "), ylim = c(min(resids[, i]), max(resids[, i])), ylab = "", lty = 1)
     abline(h = 0, col = "red")
@@ -13,10 +14,6 @@ function(x, ...){
     pacf(resids[, i], main = "PACF Residuals", ylab = "")
     acf(resids[, i]^2, main = "ACF of squared Residuals", ylab = "")
     pacf(resids[, i]^2, main = "PACF of squared Residuals", ylab = "")
-    if (interactive()){
-      cat("\nType <Return> to continue: ")
-      readline()
-    }
   }
-  par(op)
+  on.exit(par(op))
 }

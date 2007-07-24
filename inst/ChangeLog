@@ -1,3 +1,83 @@
+2007-07-24    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/fanchart.R: Adjusted for exogenous variables.
+	* R/predict.varest.R: Included list element exo.fcst.
+	* R/predict.vec2var.R ("predict.vec2var"): Included list element exo.fcst.
+	* R/logLik.svarest.R (logLik.svarest): Log-Likelihood-method for
+	SVAR models included.
+	* R/logLik.varest.R (logLik.varest): Log-Likelihood-method for
+	VAR models included.
+	* R/logLik.vec2var.R (logLik.vec2var): Log-Likelihood-method for
+	level VECM models included. 
+	
+2007-07-23    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/VARselect.R: Included deterministic variables in penalty term.
+	* R/VARselect.R ("VARselect"): Started trend at lag.max + 1.
+	* R/predict.varest.R: Changed start value of trend for type = trend.
+	* R/predict.varest.R ("predict.varest"): Fixed for season only.
+	* R/predict.varest.R ("predict.varest"): Started trend at nrow(Z)
+	+ 1 + p.
+	* R/predict.varest.R: Fixed for exogenous variables, only.
+	* R/VAR.R: Started trend at p + 1.
+	
+2007-07-20    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R: Replaced x$resid and VAR$resid with resid(x) and
+	resid(VAR), respectively.
+	* R/VAR.R ("VAR"): Removed resid from 'varest'.
+	* R/restrict.R: Removed x$resid.
+	* R/internal.R (".boot"): Pre-allocated elements of 'BOOT'.
+
+2007-07-19    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R (".boot"): Adjusted for seasonal and exoegnous
+	variables. 
+	* R/VARselect.R ("VARselect"): Adjusted for seasonal and exogenous
+	variables. 
+	* R/arch.R ("arch"): Replaced x$resid with resid(x).
+	* R/BQ.R ("BQ"): Replaced x$resid with resid(x).
+	* R/causality.R ("causality"): Replaced x$resid with resid(x).
+	* R/residuals.vec2var.R ("residuals.vec2var"): residuals-method
+	for vec2var.
+	* R/fitted.vec2var.R ("fitted.vec2var"): fitted-method for vec2var.
+	* R/plot.vec2var.R (plot.vec2var): plot-method for vec2var.
+	* R/plot.varest.R ("plot.varest"): Use of methods resid and fitted.
+	* R/Psi.varest.R ("Psi.varest"): Replaced x$resid with resid(x).
+	* R/Psi.vec2var.R ("Psi.vec2var"): Replaced x$resid with resid(x).
+	* R/serial.R ("serial"): Replaced x$resid with resid(x).
+	* R/SVAR2.R ("SVAR2"): Replaced x$resid with resid(x).
+	* R/SVAR.R ("SVAR"): Replaced x$resid with resid(x).
+	
+2007-07-18    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/VAR.R: Inserted centered seasonal dummy variable and exogenous
+	variables in function's argument.
+	* R/internal.R: Replaced "Chi^2" with "Chi-squared" in names(STATISTIC)
+	* R/coef.varest.R ("coef.varest"): Changed coef-method such that a
+	list of summary coeffecients is returned. 
+	* R/A.R ("A"): Adjusted for seasonal dummies and exogenous variables.
+	* R/plot.varprd.R ("plot.varprd"): Changed color "green" to "blue"
+	for better visibility.
+	* R/predict.varest.R ("predict.varest"): Adjusted predict method
+	for centered seasonal dummies and exogenous variables.
+	* R/plot.varcheck.R ("plot.varcheck"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varest.R ("plot.varest"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varfevd.R ("plot.varfevd"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varirf.R ("plot.varirf"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varprd.R ("plot.varprd"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varstabil.R ("plot.varstabil"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/fanchart.R ("fanchart"): Changed from heat to gray color
+	palette and par(ask = TRUE) and on.exit(par(op)) included.
+	* R/causality.R ("causality"): Changed "Chi^2" to
+	"Chi-squared". Adjusted for seasonal and exogenous variables.
+	
 2007-07-17   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* NAMESPACE: Removed predict. Included fitted.varest, coef.varest

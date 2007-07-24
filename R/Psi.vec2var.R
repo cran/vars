@@ -7,7 +7,7 @@ function(x, nstep=10, ...){
   Phi <- Phi(x, nstep = nstep)
   Psi <- array(0, dim=dim(Phi))
   params <- ncol(x$datamat[, -c(1:x$K)])
-  sigma.u <- crossprod(x$resid) / x$obs
+  sigma.u <- crossprod(resid(x)) / x$obs
   P <- t(chol(sigma.u))
   dim3 <- dim(Phi)[3]
   for(i in 1:dim3){

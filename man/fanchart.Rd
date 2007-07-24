@@ -20,7 +20,6 @@ fanchart(x, colors = NULL, cis = NULL)
     unset, a color scheme according to \code{heat.map} is used.}
   \item{cis}{A numeric vector of confidence intervals. If unset the
     sequence from 0.1 to 0.9 is used (step size 0.1).}
-  \item{\dots}{Currently not used.}
 }
 
 \author{Bernhard Pfaff}

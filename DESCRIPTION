@@ -1,8 +1,8 @@
 Package: vars
 Type: Package
 Title: VAR Modelling
-Version: 0.8-5
-Date: 2007-07-17
+Version: 1.1-5
+Date: 2007-07-24
 Author: Bernhard Pfaff
 Maintainer: Bernhard Pfaff <bernhard@pfaffikus.de>
 Depends: R (>= 2.0.0), MASS, strucchange, urca
@@ -11,4 +11,4 @@ Saveimage: yes
 Description: Estimation, lag selection, diagnostic testing, forecasting, causality analysis, forecast error variance decomposition and impulse response functions of VAR models and estimation of SVAR/SVEC models.
 License: GPL 2 or newer
 URL: http://www.pfaffikus.de
-Packaged: Tue Jul 17 13:06:27 2007; pfaffb
+Packaged: Tue Jul 24 20:54:41 2007; bp

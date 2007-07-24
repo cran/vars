@@ -1,20 +1,18 @@
 "plot.varest" <-
 function(x, ...){
-  x.sum <- summary(x)
   K <- x$K
+  resids <- resid(x)
+  fitted <- fitted(x)
   op <- par(no.readonly = TRUE)
   for(i in 1 : K){
+    par(ask = TRUE)
     layout(matrix(c(1, 1, 2, 2, 3, 4), nrow = 3, ncol = 2, byrow = TRUE))
-    plot.ts(x$datamat[, i], main = paste("Diagram of fit for", colnames(x$datamat)[i], sep=" "), ylim = c(min(c(x$datamat[, i], x$varresult[[i]]$fitted.values)), max(c(x$datamat[, i], x$varresult[[i]]$fitted.values))), ylab = "", lty = 1)
-    lines(x$varresult[[i]]$fitted.values, col = "blue", lty = 2)
-    plot.ts(x$varresult[[i]]$residuals, main = "Residuals", ylab = "", lty = 1)
+    plot.ts(x$datamat[, i], main = paste("Diagram of fit for", colnames(x$datamat)[i], sep=" "), ylim = c(min(c(x$datamat[, i], fitted[, i])), max(c(x$datamat[, i], fitted[, i]))), ylab = "", lty = 1)
+    lines(fitted[, i], col = "blue", lty = 2)
+    plot.ts(resids[, i], main = "Residuals", ylab = "", lty = 1)
     abline(h = 0, col = "red")
-    acf(x$varresult[[i]]$residuals, main = "ACF Residuals", ylab = "")
-    pacf(x$varresult[[i]]$residuals, main = "PACF Residuals", ylab = "")
-    if (interactive()){
-      cat("\nType <Return> to continue: ")
-      readline()
-    }
+    acf(resids[, i], main = "ACF Residuals", ylab = "")
+    pacf(resids[, i], main = "PACF Residuals", ylab = "")
   }
-  par(op) 
+  on.exit(par(op)) 
 }

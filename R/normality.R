@@ -6,7 +6,7 @@ function(x){
   obj.name <- deparse(substitute(x))
   K <- x$K
   obs <- x$obs
-  resid <- x$resid
+  resid <- resid(x)
   resids <- scale(resid, scale=FALSE)
   ## Jarque Bera Test (univariate)
   jbu.resids <- apply(resids, 2, function(x) .jb.uni(x, obs = obs))

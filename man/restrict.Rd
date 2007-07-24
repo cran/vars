@@ -39,7 +39,6 @@ model.}
   following elements:\cr
 
   \item{varresult}{list of \sQuote{\code{lm}} objects.}
-  \item{resid}{A matrix object of the residuals.}
   \item{datamat}{The data matrix of the endogenous and explanatory variables.}
   \item{y}{The data matrix of the endogenous variables}
   \item{type}{A character, specifying the deterministic regressors.}

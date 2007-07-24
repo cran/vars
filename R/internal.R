@@ -1,11 +1,11 @@
 require(MASS)
 require(strucchange)
 ##
-## Forecast variance-covariance matrix
+## Forecast variance-covariance matrix (VAR)
 ##
 ".fecov" <-
 function(x, n.ahead) {
-  sigma.u <- crossprod(x$resid)/(x$obs - ncol(x$datamat[, -c(1:x$K)]))
+  sigma.u <- crossprod(resid(x))/(x$obs - ncol(x$datamat[, -c(1:x$K)]))
   Sigma.yh <- array(NA, dim = c(x$K, x$K, n.ahead))
   Sigma.yh[, , 1] <- sigma.u
   Phi <- Phi(x, nstep = n.ahead)
@@ -44,7 +44,7 @@ function(x, n.ahead) {
 ##
 ".fecovvec2var" <-
 function(x, n.ahead) {
-  sigma.u <- crossprod(x$resid)/x$obs 
+  sigma.u <- crossprod(resid(x))/x$obs 
   Sigma.yh <- array(NA, dim = c(x$K, x$K, n.ahead))
   Sigma.yh[, , 1] <- sigma.u
   Phi <- Phi(x, nstep = n.ahead)
@@ -130,15 +130,14 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
   total <- VAR$totobs
   type <- VAR$type
   B <- B(VAR)
-  BOOT <- list()
+  BOOT <- vector("list", runs)
   ysampled <- matrix(0, nrow = total, ncol = K)
   colnames(ysampled) <- colnames(VAR$y)
-  Zdet <- switch(type,
-                 "const" = matrix(rep(1, obs), nrow = obs, ncol = 1),
-                 "trend" = matrix(seq(1 : obs), nrow = obs, ncol = 1),
-                 "both" = matrix(rep(1, obs), seq(1 : obs), nrow = obs, ncol = 2),
-                 "none" = NULL)
-  resorig <- scale(VAR$resid, scale = FALSE)
+  Zdet <- NULL
+  if(ncol(VAR$datamat) > (K * (p+1))){
+    Zdet <- as.matrix(VAR$datamat[, (K * (p + 1) + 1):ncol(VAR$datamat)])
+  }
+  resorig <- scale(resid(VAR), scale = FALSE)
   B <- B(VAR)
   for(i in 1:runs){
     booted <- sample(c(1 : obs), replace=TRUE)
@@ -147,7 +146,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
     ysampled[c(1 : p), ] <- VAR$y[c(1 : p), ]
     for(j in 1 : obs){
       lasty <- lasty[1 : (K * p)]
-      Z <- c(Zdet[j, ], lasty)
+      Z <- c(lasty, Zdet[j, ])
       ysampled[j + p, ] <- B %*% Z + resid[j, ]
       lasty <- c(ysampled[j + p, ], lasty) 
     }
@@ -177,8 +176,8 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
             temp[i] <- matrix(BOOT[[i]][[j]])[l, m]
           }
         }
-        mat.l[l, m] <- quantile(temp, lower)
-        mat.u[l, m] <- quantile(temp, upper)
+        mat.l[l, m] <- quantile(temp, lower, na.rm = TRUE)
+        mat.u[l, m] <- quantile(temp, upper, na.rm = TRUE)
       }
     }
     colnames(mat.l) <- response
@@ -302,10 +301,10 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
   ##
   ## Initialising Bootstrap
   ##
-  BOOT <- list()
+  BOOT <- vector("list", runs)
   ysampled <- matrix(0, nrow = total, ncol = K)
   colnames(ysampled) <- colnames(x$y)
-  resorig <- scale(x$resid, scale = FALSE)
+  resorig <- scale(resid(x), scale = FALSE)
   ##
   ## Conducting the bootstrapping
   ##
@@ -350,8 +349,8 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
             temp[i] <- matrix(BOOT[[i]][[j]])[l, m]
           }
         }
-        mat.l[l, m] <- quantile(temp, lower)
-        mat.u[l, m] <- quantile(temp, upper)
+        mat.l[l, m] <- quantile(temp, lower, na.rm = TRUE)
+        mat.u[l, m] <- quantile(temp, upper, na.rm = TRUE)
       }
     }
   }
@@ -404,7 +403,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
   ##
   ## Initialising Bootstrap
   ##
-  BOOT <- list()
+  BOOT <- vector("list", runs)
   ysampled <- matrix(0, nrow = total, ncol = K)
   colnames(ysampled) <- colnames(varlevel$y)
   resorig <- scale(varlevel$resid, scale = FALSE)
@@ -453,8 +452,8 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
             temp[i] <- matrix(BOOT[[i]][[j]])[l, m]
           }
         }
-        mat.l[l, m] <- quantile(temp, lower)
-        mat.u[l, m] <- quantile(temp, upper)
+        mat.l[l, m] <- quantile(temp, lower, na.rm = TRUE)
+        mat.u[l, m] <- quantile(temp, upper, na.rm = TRUE)
       }
     }
   }
@@ -474,7 +473,7 @@ function(x, lags.single){
   mat <- embed(scale(x)^2, lags.single)
   arch.lm <- summary(lm(mat[, 1] ~ mat[, -1]))
   STATISTIC <- arch.lm$r.squared*length(resid(arch.lm))
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   PARAMETER <- lags.single - 1
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = PARAMETER)
@@ -505,7 +504,7 @@ function(x, lags.multi, obj.name, K, obs){
   R2m <- 1 - (2 / (K * (K + 1))) * sum(diag(omega1 %*% solve(omega0)))
   n <- nrow(archm.lm1.resids)
   STATISTIC <- 0.5 * n * K * (K+1) * R2m
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   lags.multi <- lags.multi - 1
   PARAMETER <- lags.multi * K^2 * (K + 1)^2 / 4
   names(PARAMETER) <- "df"
@@ -528,7 +527,7 @@ function(x, obs){
   b1 <- (m3 / m2^(3 / 2))^2
   b2 <- (m4/m2^2)
   STATISTIC <- obs * b1 / 6 + obs * (b2 - 3)^2 / 24
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   PARAMETER <- 2
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = 2)
@@ -549,7 +548,7 @@ function(x, obs, K, obj.name){
   s3 <- obs * t(b1) %*% b1 / 6
   s4 <- obs * t(b2 - rep(3, K)) %*% (b2 - rep(3, K)) / 24
   STATISTIC <- s3 + s4
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   PARAMETER <- 2 * K
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = PARAMETER)
@@ -557,7 +556,7 @@ function(x, obs, K, obj.name){
   result1 <- list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL, method = METHOD, data.name = paste("Residuals of VAR object", obj.name))
   class(result1) <- "htest"
   STATISTIC <- s3
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   PARAMETER <- K
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = PARAMETER)
@@ -565,7 +564,7 @@ function(x, obs, K, obj.name){
   result2 <- list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL, method = METHOD, data.name = paste("Residuals of VAR object", obj.name))
   class(result2) <- "htest"
   STATISTIC <- s4
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   PARAMETER <- K
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = PARAMETER)
@@ -607,7 +606,7 @@ function(x, K, obs, lags.pt, obj.name, resids){
   nstar <- K^2 * x$p
   ## htest objects for Qh and Qh.star
   STATISTIC <- Qh
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   if(identical(class(x), "varest")){
     PARAMETER <- (K^2 * lags.pt - nstar)
   } else {
@@ -619,7 +618,7 @@ function(x, K, obs, lags.pt, obj.name, resids){
   PT1 <- list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL, method = METHOD, data.name = paste("Residuals of VAR object", obj.name))
   class(PT1) <- "htest"
   STATISTIC <- Qh.star
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   if(identical(class(x), "varest")){
     PARAMETER <- (K^2 * lags.pt - nstar)
   } else {
@@ -662,7 +661,7 @@ function(x, K, obs, lags.bg, obj.name, resids){
   }
   LMh.stat <- obs * (K - sum(diag(crossprod(solve(sigma.1), sigma.0))))
   STATISTIC <- LMh.stat
-  names(STATISTIC) <- "Chi^2"
+  names(STATISTIC) <- "Chi-squared"
   PARAMETER <- lags.bg * K^2
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = PARAMETER)

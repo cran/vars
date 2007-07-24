@@ -4,6 +4,9 @@ function(x, ...){
   idx2 <- length(x$response)
   op <- par(no.readonly = TRUE)
   for(i in 1 : idx1){
+    if(idx1 > 1){
+      par(ask = TRUE)
+    }
     layout(matrix(1 : idx2, nrow = idx2, ncol = 1))
     for(j in 1 : idx2){
       limit1 <- min(c(x$irf[[i]][, j], x$Lower[[i]][, j], x$Upper[[i]][, j]))
@@ -29,12 +32,6 @@ function(x, ...){
         mtext(paste((1-x$ci)*100, "% Bootstrap CI, ", x$runs, "runs"), side = 1, line = 2, outer = FALSE)
       }
     }
-    if(idx1 > 1){
-      if (interactive()){
-        cat("\nType <Return> to continue: ")
-        readline()
-      }
-    }
   }
-  par(op)
+  on.exit(par(op))
 }

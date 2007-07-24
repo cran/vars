@@ -1,4 +1,4 @@
 "coef.varest" <-
 function(object, ...){
-  return(sapply(object$varresult, coef))
+  return(lapply(lapply(object$varresult, summary), coef))
 }

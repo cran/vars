@@ -6,7 +6,7 @@ function(x, lags.pt = 16, lags.bg = 5){
   obj.name <- deparse(substitute(x))
   K <- x$K
   obs <- x$obs
-  resids <- x$resid
+  resids <- resid(x)
   lags.pt <- abs(as.integer(lags.pt))
   lags.bg <- abs(as.integer(lags.bg))
   ptm.resids <- .pt.multi(x, K = K, obs = obs, lags.pt = lags.pt, obj.name = obj.name, resids = resids)

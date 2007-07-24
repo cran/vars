@@ -8,11 +8,16 @@ S3method(fevd, svecest)
 S3method(fevd, vec2var)
 
 S3method(fitted, varest)
+S3method(fitted, vec2var)
 
 S3method(irf, varest)
 S3method(irf, svarest)
 S3method(irf, svecest)
 S3method(irf, vec2var)
+
+S3method(logLik, varest)
+S3method(logLik, vec2var)
+S3method(logLik, svarest)
 
 S3method(Phi, varest)
 S3method(Phi, svarest)
@@ -39,11 +44,13 @@ S3method(plot, varfevd)
 S3method(plot, varirf)
 S3method(plot, varprd)
 S3method(plot, varstabil)
+S3method(plot, vec2var)
 
 S3method(predict, varest)
 S3method(predict, vec2var)
 
 S3method(residuals, varest)
+S3method(residuals, vec2var)
 
 S3method(summary, varest)
 

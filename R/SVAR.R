@@ -26,7 +26,7 @@ function(x, Amat = NULL, Bmat = NULL, start = NULL, ...){
   K <- x$K
   obs <- x$obs
   df <- summary(x$varresult[[1]])$df[2]
-  sigma <- crossprod(x$resid) / df
+  sigma <- crossprod(resid(x)) / df
   if((svartype == "B-model") || (svartype == "A-model")){
     if(K^2 - params <= K*(K-1)/2){
       stop("\nModel is not identified,\nchoose different settings for 'Amat' and/or 'Bmat'.\n")      

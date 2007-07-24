@@ -7,7 +7,7 @@ function(x, Ra = NULL, Rb = NULL, ra = NULL, rb = NULL, start = NULL, max.iter =
   ## Some preliminary settings and computations
   ##
   obs <- x$obs
-  Sigma <- crossprod(x$resid) / obs
+  Sigma <- crossprod(resid(x)) / obs
   n <- x$K
   nsq <- n^2
   ##

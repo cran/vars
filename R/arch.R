@@ -8,7 +8,7 @@ function(x, lags.single = 16, lags.multi = 5){
   lags.multi <- abs(as.integer(lags.multi)) 
   K <- x$K
   obs <- x$obs
-  resid <- x$resid
+  resid <- resid(x)
   resids <- scale(resid)
   ## ARCH test (univariate)
   archs.resids <- apply(resids, 2, function(x) .arch.uni(x, lags.single = lags.single))
