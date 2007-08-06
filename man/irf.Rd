@@ -118,9 +118,9 @@ runs = 100, seed = NULL, ...)
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{vec2var}},
-  \code{\link{SVEC}}, \code{\link{Phi}}, \code{\link{Psi}},
-  \code{\link{plot.varirf}} 
+  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{SVAR2}},
+  \code{\link{vec2var}}, \code{\link{SVEC}}, \code{\link{Phi}},
+  \code{\link{Psi}}, \code{\link{plot}} 
 }
 
 \examples{

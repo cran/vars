@@ -1,3 +1,18 @@
+2007-08-06    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/predict.varest.R ("predict.varest"): Season > n.ahead: coerced
+	seasonal to as.matrix.
+
+2007-07-26    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* man/plot.Rd: Summarised documentation for various plot methods
+	in one file.
+
+2007-07-25    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/VAR.R ("VAR"): Included automatic lag length selection by an
+	information criteria.
+
 2007-07-24    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/fanchart.R: Adjusted for exogenous variables.

@@ -76,7 +76,8 @@
 }
 
 \note{
-  The first returned array element is the starting value, \emph{i.e.}, \eqn{\Phi_0}.
+  The first returned array element is the starting value, \emph{i.e.},
+  \eqn{\Phi_0}. 
 }
 
 \author{Bernhard Pfaff}
@@ -91,7 +92,7 @@
 
 \seealso{
   \code{\link{Psi}}, \code{\link{VAR}}, \code{\link{SVAR}},
-  \code{\link{vec2var}}, \code{\link{SVEC}} 
+  \code{\link{SVAR2}}, \code{\link{vec2var}}, \code{\link{SVEC}} 
 }
 
 \examples{

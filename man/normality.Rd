@@ -8,7 +8,8 @@
 
 \description{
   This function computes univariate and multivariate Jarque-Bera tests
-  and multivariate skewness and kurtosis tests for the residuals of a VAR(p). 
+  and multivariate skewness and kurtosis tests for the residuals of a
+  VAR(p) or of a VECM in levels. 
 }
 
 \usage{
@@ -58,7 +59,7 @@ normality(x)
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{plot.varcheck}}
+  \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{plot}}
 }
 
 \examples{

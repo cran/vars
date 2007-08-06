@@ -2,6 +2,8 @@
 
 \alias{fitted}
 
+\alias{fitted.values}
+
 \alias{fitted.varest}
 
 \alias{fitted.vec2var}
@@ -40,15 +42,13 @@
 }
 
 \seealso{
-  \code{\link{VAR}}
+  \code{\link{VAR}}, \code{\link{vec2var}}
 }
 
 \examples{
-\dontrun{
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
 fitted(var.2c)
-}
 }
 
 \keyword{regression}

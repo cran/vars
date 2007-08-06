@@ -35,7 +35,7 @@ function(object, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
     cycle <- tail(data.all[, seas.names], season)
     seasonal <- as.matrix(cycle, nrow = season, ncol = season - 1)
     if(nrow(seasonal) >= n.ahead){
-      seasonal <- matrix(cycle[1:n.ahead, ], nrow = n.ahead, ncol = season -1 )
+      seasonal <- as.matrix(cycle[1:n.ahead, ], nrow = n.ahead, ncol = season -1 )
     } else {
       while(nrow(seasonal) < n.ahead){
         seasonal <- rbind(seasonal, cycle)

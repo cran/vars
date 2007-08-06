@@ -90,7 +90,8 @@ arch(x, lags.single = 16, lags.multi = 5)
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{plot.varcheck}}
+  \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{resid}},
+  \code{\link{plot}}
 }
 
 \examples{

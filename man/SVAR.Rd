@@ -65,8 +65,8 @@ SVAR(x, Amat = NULL, Bmat = NULL, start = NULL, ...)
   \sQuote{\code{NULL}} (the default). Finally, for an \sQuote{AB-model}
   both arguments, \sQuote{\code{Amat}} and \sQuote{\code{Bmat}}, have to
   be set as matrix objects containing desired restrictions and
-  \sQuote{\code{NA}} values. The parameters are estimated by minimising the negative of the
-  concentrated log-likelihood function:
+  \sQuote{\code{NA}} values. The parameters are estimated by minimising
+  the negative of the concentrated log-likelihood function:
 
   \deqn{
     \ln L_c(A, B) = - \frac{KT}{2}\ln(2\pi) + \frac{T}{2}\ln|A|^2 -
@@ -136,7 +136,8 @@ SVAR(x, Amat = NULL, Bmat = NULL, start = NULL, ...)
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{SVAR2}}, \code{\link{SVEC}}
+  \code{\link{VAR}}, \code{\link{SVAR2}}, \code{\link{SVEC}},
+  \code{\link{logLik}}, \code{\link{irf}}, \code{\link{fevd}} 
 }
 
 \examples{

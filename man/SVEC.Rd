@@ -50,8 +50,8 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
     \bold{y}_t = \Xi \sum_{i=1}^t \bold{u}_i + \Xi^*(L)\bold{u}_t +
     \bold{y}_0^* \quad ,}
 
-  with \eqn{\Xi = \beta_{orth} (\alpha_{orth}'(I_K -
-    \sum_{i=1}^{p-1}\Gamma_i)\beta_{orth} )^{-1}\alpha_{orth}'} and
+  with \eqn{\Xi = \beta_{\perp} (\alpha_{\perp}'(I_K -
+    \sum_{i=1}^{p-1}\Gamma_i)\beta_{\perp} )^{-1}\alpha_{\perp}'} and
   \eqn{\Xi^*(L)} signifies an infinite-order polynomial in the lag
   operator with coefficient matrices \eqn{\Xi^*_j} that tends to zero
   with increasing size of \eqn{j}.\cr 
@@ -132,7 +132,8 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
 }
 
 \seealso{
-  \code{\link{SVAR}}, \code{\link{SVAR2}}, 
+  \code{\link{SVAR}}, \code{\link{SVAR2}}, \code{\link{irf}},
+  \code{\link{fevd}}  
 }
 
 \examples{

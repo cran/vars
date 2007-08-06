@@ -72,7 +72,7 @@
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{plot.varprd}},
+  \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{plot}},
   \code{\link{fanchart}}
 } 
 

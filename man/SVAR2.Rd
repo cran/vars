@@ -128,7 +128,8 @@ max.iter = 100, conv.crit = 0.1e-6, maxls = 1.0, lrtest = TRUE)
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{SVEC}}
+  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{SVEC}},
+  \code{\link{logLik}}, \code{\link{irf}}, \code{\link{fevd}} 
 }
 
 \examples{

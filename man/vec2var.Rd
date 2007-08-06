@@ -64,7 +64,8 @@ vec2var(z, r = 1)
 \seealso{
   \code{\link[urca]{ca.jo}}, \code{\link{predict}}, \code{\link{irf}},
   \code{\link{fevd}}, \code{\link{Phi}}, \code{\link{Psi}},
-  \code{\link{normality}}, \code{\link{arch}}, \code{\link{serial}}
+  \code{\link{normality}}, \code{\link{arch}}, \code{\link{serial}},
+  \code{\link{logLik}}, \code{\link{plot}} 
 }
 
 \examples{

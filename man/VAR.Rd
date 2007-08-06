@@ -14,7 +14,8 @@
 
 \usage{
 VAR(y, p = 1, type = c("const", "trend", "both", "none"),
-season = NULL, exogen = NULL)
+season = NULL, exogen = NULL, lag.max = NULL,
+ic = c("AIC", "HQ", "SC", "FPE"))
 }
 
 \arguments{
@@ -24,6 +25,10 @@ season = NULL, exogen = NULL)
   \item{season}{Inlusion of centered seasonal dummy variables (integer
     value of frequency).}
   \item{exogen}{Inlusion of exogenous variables.}
+  \item{lag.max}{Integer, determines the highest lag order for lag
+    length selection according to the choosen \code{ic}.}
+  \item{ic}{Character, selects the information criteria, if
+    \code{lag.max} is not \code{NULL}.}
 }
 
 \details{
@@ -45,7 +50,10 @@ season = NULL, exogen = NULL)
   setting \code{season} to the desired frequency (integer) and/or providing a
   matrix object for \code{exogen}, respectively. The default for \code{type} is
   \code{const} and for \code{season} and \code{exogen} the default is
-  set to \code{NULL}. 
+  set to \code{NULL}.\cr
+  If for \code{lag.max} an integer value is provided instead of
+  \code{NULL} (the default), the lag length is determined by the
+  selected information criteria in \code{ic}, the default is Akaike.
 }
 
 \value{
@@ -76,11 +84,12 @@ season = NULL, exogen = NULL)
 }
 
 \seealso{
-  \code{\link{summary.varest}}, \code{\link{plot.varest}},
-  \code{\link{coef.varest}}, \code{\link{residuals.varest}},
-  \code{\link{fitted.varest}}, \code{\link{predict}}, \code{\link{irf}},
+  \code{\link{summary}}, \code{\link{plot}},
+  \code{\link{coef}}, \code{\link{residuals}},
+  \code{\link{fitted}}, \code{\link{predict}}, \code{\link{irf}},
   \code{\link{fevd}}, \code{\link{Phi}}, \code{\link{Psi}},
-  \code{\link{normality}}, \code{\link{arch}}, \code{\link{serial}}  
+  \code{\link{normality}}, \code{\link{arch}}, \code{\link{serial}},
+  \code{\link{VARselect}}, \code{\link{logLik}} 
 }
 
 \examples{

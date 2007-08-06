@@ -76,9 +76,9 @@
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{vec2var}},
-  \code{\link{SVEC}}, \code{\link{Phi}}, \code{\link{Psi}},
-  \code{\link{plot.varfevd}}  
+  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{SVAR2}},
+  \code{\link{vec2var}}, \code{\link{SVEC}}, \code{\link{Phi}},
+  \code{\link{Psi}}, \code{\link{plot}}  
 }
 
 \examples{

@@ -74,7 +74,8 @@ season = NULL, exogen = NULL)
   
   \item{selection}{Vector with the optimal lag number according to each
     criterium.}  
-  \item{criteria}{A matrix containing the values of the criteria up to \code{lag.max}.}
+  \item{criteria}{A matrix containing the values of the criteria up to
+    \code{lag.max}.} 
 }
 
 \author{Bernhard Pfaff}

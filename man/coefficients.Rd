@@ -2,6 +2,8 @@
 
 \alias{coef}
 
+\alias{coefficients}
+
 \alias{coef.varest}
 
 \encoding{latin1}
@@ -40,11 +42,9 @@
 }
 
 \examples{
-\dontrun{
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
-coefvar.2c)
-}
+coef(var.2c)
 }
 
 \keyword{regression}

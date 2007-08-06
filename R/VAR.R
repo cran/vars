@@ -1,8 +1,8 @@
 "VAR" <- 
 function (y, p = 1, type = c("const", "trend", "both", "none"), 
-    season = NULL, exogen = NULL) 
+    season = NULL, exogen = NULL, lag.max = NULL, ic = c("AIC", "HQ", "SC", "FPE")) 
 {
-    y <- as.matrix(y)
+  y <- as.matrix(y)
     if (any(is.na(y))) 
         stop("\nNAs in y.\n")
     if (ncol(y) < 2) 
@@ -17,6 +17,11 @@ function (y, p = 1, type = c("const", "trend", "both", "none"),
     type <- match.arg(type)
     obs <- dim(y)[1]
     K <- dim(y)[2]
+    if(!is.null(lag.max)){
+      lag.max <- abs(as.integer(lag.max))
+      ic <- paste(match.arg(ic), "(n)", sep = "")
+      p <- VARselect(y, lag.max = lag.max, type = type, season = season, exogen = exogen)$selection[ic]
+    }
     sample <- obs - p
     ylags <- embed(y, dimension = p + 1)[, -(1:K)]
     temp1 <- NULL
