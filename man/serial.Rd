@@ -12,7 +12,8 @@
 }
 
 \usage{
-serial(x, lags.pt = 16, lags.bg = 5)
+serial(x, lags.pt = 16, lags.bg = 5, type = c("PT.asymptotic",
+"PT.adjusted", "BG", "ES") )
 }
 
 \arguments{
@@ -22,7 +23,9 @@ serial(x, lags.pt = 16, lags.bg = 5)
   \item{lags.pt}{An integer specifying the lags to be used for the
     Portmanteau statistic.}
   \item{lags.bg}{An integer specifying the lags to be used for the
-    Breusch-Godfrey statistic.}  
+    Breusch-Godfrey statistic.}
+  \item{type}{Character, the type of test. The default is an asymptotic
+    Portmanteau test.}
 }
 
 \details{
@@ -34,13 +37,17 @@ serial(x, lags.pt = 16, lags.bg = 5)
   }
   where \eqn{\hat{C}_i = \frac{1}{T}\sum_{t = i + 1}^T \bold{\hat{u}}_t
     \bold{\hat{u}}_{t - i}'}. The test statistic is approximately
-  distributed as \eqn{\chi^2(K^2(h - p))}. For smaller sample sizes
+  distributed as \eqn{\chi^2(K^2(h - p))}. This test statistic is
+  choosen by setting \code{type = "PT.asymptotic"}. For smaller sample sizes
   and/or values of \eqn{h} that are not sufficiently large, a corrected
   test statistic is computed as:
   \deqn{
     Q_h^* = T^2 \sum_{j = 1}^h
     \frac{1}{T - j}tr(\hat{C}_j'\hat{C}_0^{-1}\hat{C}_j\hat{C}_0^{-1}) \quad ,
-  }  
+  }
+  This test statistic can be accessed, if \code{type = "PT.adjusted"} is
+  set.\cr  
+
   The Breusch-Godfrey LM-statistic is based upon the following auxiliary
   regressions:
   \deqn{
@@ -59,7 +66,9 @@ serial(x, lags.pt = 16, lags.bg = 5)
   where \eqn{\tilde{\Sigma}_R} and \eqn{\tilde{\Sigma}_e} assign the
   residual covariance matrix of the restricted and unrestricted
   model, respectively. The test statistic \eqn{LM_h} is distributed as
-  \eqn{\chi^2(hK^2)}.
+  \eqn{\chi^2(hK^2)}. This test statistic is calculated if \code{type =
+    "BG"} is used.\cr
+  
   Edgerton and Shukur (1999) proposed a small sample correction, which
   is defined as:
   \deqn{
@@ -70,7 +79,9 @@ serial(x, lags.pt = 16, lags.bg = 5)
   \eqn{r = ((K^2m^2 - 4)/(K^2 + m^2 - 5))^{1/2}}, \eqn{q = 1/2 K m - 1}
   and \eqn{N = T - K - m - 1/2(K - m + 1)}, whereby \eqn{n} is the
   number of regressors in the original system and \eqn{m = Kh}. The
-  modified test statistic is distributed as \eqn{F(hK^2, int(Nr - q))}.   
+  modified test statistic is distributed as \eqn{F(hK^2, int(Nr -
+    q))}. This modified statistic will be returned, if \code{type =
+    "ES"} is provided in the call to \code{serial()}.    
 }
 
 \value{
@@ -114,7 +125,7 @@ serial(x, lags.pt = 16, lags.bg = 5)
 \examples{
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
-serial(var.2c, lags.pt = 16, lags.bg = 5)
+serial(var.2c, lags.pt = 16, type = "PT.adjusted")
 }
 
 \keyword{regression}

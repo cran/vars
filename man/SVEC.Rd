@@ -132,8 +132,7 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
 }
 
 \seealso{
-  \code{\link{SVAR}}, \code{\link{SVAR2}}, \code{\link{irf}},
-  \code{\link{fevd}}  
+  \code{\link{SVAR}}, \code{\link{irf}}, \code{\link{fevd}}  
 }
 
 \examples{

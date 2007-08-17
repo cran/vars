@@ -57,8 +57,7 @@
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{SVAR}},
-  \code{\link{SVAR2}} 
+  \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{SVAR}} 
 } 
 
 \examples{

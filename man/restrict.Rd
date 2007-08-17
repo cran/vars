@@ -73,7 +73,7 @@ model.}
 \examples{
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
-## Restrictions by significance
+## Restrictions determined by thresh
 restrict(var.2c, method = "ser")
 ## Restrictions set manually
 restrict <- matrix(c(1, 1, 1, 1, 1, 1, 0, 0, 0, 

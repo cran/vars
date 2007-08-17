@@ -15,10 +15,17 @@ function(x, method=c("ser", "manual"), thresh=2.0, resmat=NULL){
     tvals <- abs(coef(summary(x))[, 3])
     datares <- datasub
     while(min(tvals) < thresh){
-      datares <- datares[, -1 * which.min(tvals)]
-      lmres <- lm(y ~ -1 + ., data=datares)
-      tvals <- abs(coef(summary(lmres))[, 3])     
-      if(ncol(datares) == 1) {break}
+      if(ncol(datares) > 1){
+        cnames <- colnames(datares)
+        datares <- as.data.frame(datares[, -1 * which.min(tvals)])
+        colnames(datares) <- cnames[-1 * which.min(tvals)]
+        lmres <- lm(y ~ -1 + ., data = datares)
+        tvals <- abs(coef(summary(lmres))[, 3])
+      } else {
+        lmres <- NULL
+        datares <- NULL
+        break
+      }
     }
     return(list(lmres=lmres, datares=datares))
   }
@@ -28,9 +35,12 @@ function(x, method=c("ser", "manual"), thresh=2.0, resmat=NULL){
     rownames(x$restrictions) <- colnames(yendog)
     for(i in 1 : K){
       temp <- ser(x$varresult[[i]], yendog[, i])
+      if(is.null(temp$lmres)){
+        stop(paste("\nNo significant regressors remaining in equation for", colnames(yendog)[i], ".\n"))
+      }        
       x$varresult[[i]] <- temp[[1]]
       namessub <- colnames(temp[[2]])
-      x$restrictions[i, namesall%in%namessub] <- 1 
+      x$restrictions[i, namesall %in% namessub] <- 1 
     }
   }else if(method=="manual"){
     resmat <- as.matrix(resmat)

@@ -70,7 +70,7 @@
 
 \seealso{
   \code{\link{Phi}}, \code{\link{VAR}}, \code{\link{SVAR}},
-  \code{\link{SVAR2}}, \code{\link{vec2var}}
+  \code{\link{vec2var}} 
 }
 
 \examples{

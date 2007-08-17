@@ -25,18 +25,91 @@
 }
 
 \usage{
-\method{plot}{varcheck}(x, ...)
-\method{plot}{varest}(x, ...)
+\method{plot}{varcheck}(x, names = NULL, main.resid = NULL, main.hist =
+NULL, main.acf = NULL, main.pacf = NULL, main.acf2 = NULL, main.pacf2 =
+NULL, ylim.resid = NULL, ylim.hist = NULL, ylab.resid = NULL, xlab.resid
+= NULL, xlab.acf = NULL, lty.resid = NULL, lwd.resid = NULL, col.resid =
+NULL, col.edf = NULL, lag.acf = NULL, lag.pacf = NULL, lag.acf2 = NULL,
+lag.pacf2 = NULL, mar = par("mar"), oma = par("oma"), ...)
+\method{plot}{varest}(x, names = NULL, main.fit = NULL, main.resid =
+NULL, main.acf = NULL, main.pacf = NULL, ylim.fit = NULL, ylim.resid =
+NULL, lty.fit = NULL, lty.resid = NULL, lwd.fit = NULL, lwd.resid =
+NULL, lag.acf = NULL, lag.pacf = NULL, col.fit = NULL, col.resid = NULL,
+ylab.fit = NULL, ylab.resid = NULL, ylab.acf = NULL, ylab.pacf = NULL,
+xlab.fit = NULL, xlab.resid = NULL, nc, mar = par("mar"), oma =
+par("oma"), ...)
 \method{plot}{vec2var}(x, ...)
-\method{plot}{varfevd}(x, ...)
-\method{plot}{varirf}(x, ...)
-\method{plot}{varprd}(x, ...)
-\method{plot}{varstabil}(x, ...)
+\method{plot}{varfevd}(x, plot.type = c("multiple", "single"),
+names = NULL, main = NULL, col = NULL, ylim = NULL, ylab = NULL,
+xlab = NULL, legend = NULL, names.arg = NULL, nc,
+mar = par("mar"), oma = par("oma"), addbars = 1, ...)
+\method{plot}{varirf}(x, plot.type = c("multiple", "single"), names =
+NULL, main = NULL, lty = NULL, lwd = NULL, col = NULL, ylim = NULL, ylab
+= NULL, xlab = NULL, nc, mar = par("mar"), oma = par("oma"), ...) 
+\method{plot}{varprd}(x, plot.type = c("multiple", "single"),
+names = NULL, main = NULL, col = NULL, lty = NULL, lwd = NULL,
+ylim = NULL, ylab = NULL, xlab = NULL, nc, mar = par("mar"),
+oma = par("oma"), ...)
+\method{plot}{varstabil}(x, plot.type = c("multiple", "single"), names =
+NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...)
 }
 
 \arguments{
+  \item{addbars}{Integer, number of empty bars in barplot to reserve
+    space for legend. If set to zero, no legend will be returned.}
+  \item{col}{Character vector, colors to use in plot.}
+  \item{col.edf}{Character, color of residuals' EDF.}
+  \item{col.fit}{Character vector, colors for diagram of fit.}
+  \item{col.resid}{Character vector, colors for residual plot.}
+  \item{lag.acf}{Integer, lag.max for ACF of residuals.}
+  \item{lag.acf2}{Integer, lag.max for ACF of squared residuals.}
+  \item{lag.pacf}{Integer, lag.max for PACF of residuals.}
+  \item{lag.pacf2}{Integer, lag.max for PACF of squared residuals.}
+  \item{legend}{Character vector of names in legend.}
+  \item{lty}{Integer/Character, the line types.}
+  \item{lty.fit}{Vector, lty for diagram of fit.}
+  \item{lty.resid}{Vector, lty for residual plot.}
+  \item{lwd}{The width of the lines.}
+  \item{lwd.fit}{Vector, lwd for diagram of fit.}
+  \item{lwd.resid}{Vector, lwd for residual plot.}
+  \item{main}{Character vector, the titles of the plot.}
+  \item{main.acf}{Character vector, main for residuals' ACF.}
+  \item{main.acf2}{Character vector, main for squared residuals' ACF.}
+  \item{main.fit}{Character vector, main for diagram of fit.}
+  \item{main.hist}{Character vector, main for histogram of residuals.}
+  \item{main.pacf}{Character vector, main for residuals' PACF.}
+  \item{main.pacf2}{Character vector, main for squared residuals' PACF.}
+  \item{main.resid}{Character vector, main for residual plot.}
+  \item{mar}{Setting of margins.}
+  \item{names}{Character vector, the variables names to be plotted. If
+    left \code{NULL}, all variables are plotted.} 
+  \item{names.arg}{Character vector, names for x-axis of barplot.}
+  \item{nc}{Integer, number of columns for multiple plot.}
+  \item{oma}{Setting of outer margins.}
+  \item{plot.type}{Character, if \code{multiple} all plots are drawn in
+    a single device, otherwise the plots are shown consecutively.}
   \item{x}{An object of one of the above classes.}
-  \item{\dots}{Currently not used.}
+  \item{xlab}{Character vector signifying the labels for the x-axis.}
+  \item{xlab.acf}{Character, xlab for ACF and PACF of residuals and
+    their squares in plot.varcheck.}
+  \item{xlab.fit}{Character vector, xlab for diagram of fit.}
+  \item{xlab.resid}{Character vector, xlab for residual plot.}  
+  \item{ylab}{Character vector signifying the labels for the y-axis.}
+  \item{ylab.acf}{Character, ylab for ACF.}
+  \item{ylab.fit}{Character vector, ylab for diagram of fit.}
+  \item{ylab.pacf}{Character, ylab for PACF}
+  \item{ylab.resid}{Character vector, ylab for residual plot.}
+  \item{ylim}{Vector, the limits of the y-axis.}
+  \item{ylim.fit}{Vector, ylim for diagram of fit.}
+  \item{ylim.hist}{Vector, ylim for histogram of residuals.}
+  \item{ylim.resid}{Vector, ylim for residual plot.}
+  \item{\dots}{Passed to internal plot function.}
+}
+
+\details{
+  The plot-method for objects with class attribute \code{vec2var} is the
+  same as for objects with class attribute \code{varest}. Hence, the
+  same arguments can be utilised.
 }
 
 \author{Bernhard Pfaff}

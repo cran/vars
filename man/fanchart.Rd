@@ -10,7 +10,9 @@
 }
 
 \usage{
-fanchart(x, colors = NULL, cis = NULL)
+fanchart(x, colors = NULL, cis = NULL, names = NULL, main = NULL, ylab =
+NULL, xlab = NULL, col.y = NULL, nc, plot.type = c("multiple",
+"single"), mar = par("mar"), oma = par("oma"), ... )
 }
 
 \arguments{
@@ -20,6 +22,18 @@ fanchart(x, colors = NULL, cis = NULL)
     unset, a gray color scheme is used.}
   \item{cis}{A numeric vector of confidence intervals. If unset the
     sequence from 0.1 to 0.9 is used (step size 0.1).}
+  \item{names}{Character vector, names of variables for fancharts. If
+    unset, all variables are plotted.}
+  \item{main}{Character vector, title for fanchart plots.}
+  \item{ylab}{Character, ylab for fanchart.}
+  \item{xlab}{Character, xlab for fanchart.}
+  \item{col.y}{Character, color for plotted time series.}
+  \item{plot.type}{Character, if multiple all fancharts appear in one
+    device.}
+  \item{nc}{Integer, number of columns if plot.type is multiple.}
+  \item{mar}{Vector, setting of margins.}
+  \item{oma}{Vector, setting of outer margins.}
+  \item{...}{Dot argument, passed to plot.ts.}
 }
 
 \author{Bernhard Pfaff}
@@ -31,7 +45,8 @@ fanchart(x, colors = NULL, cis = NULL)
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{predict}} , \code{\link{plot}} 
+  \code{\link{VAR}}, \code{\link{predict}}, \code{\link{plot}},
+  \code{\link{par}}  
 }
 
 \examples{

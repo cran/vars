@@ -66,8 +66,7 @@ stability(x, type = c("Rec-CUSUM", "OLS-CUSUM", "Rec-MOSUM",
 }
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{plot}},
-  \code{\link[strucchange]{efp}} 
+  \code{\link{VAR}}, \code{\link{plot}}, \code{\link[strucchange]{efp}} 
 }
 
 \examples{

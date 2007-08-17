@@ -9,11 +9,12 @@
 \encoding{latin1}
 
 \description{
-  This function computes univariate and multivariate ARCH-LM tests for a VAR(p). 
+  This function computes univariate and multivariate ARCH-LM tests for a
+  VAR(p).  
 }
 
 \usage{
-arch(x, lags.single = 16, lags.multi = 5)
+arch(x, lags.single = 16, lags.multi = 5, multivariate.only = TRUE)
 }
 
 \arguments{
@@ -24,8 +25,10 @@ arch(x, lags.single = 16, lags.multi = 5)
     univariate ARCH statistics.}
   \item{lags.multi}{An integer specifying the lags to be used for the
     multivariate ARCH statistic.}
-  
+  \item{multivariate.only}{If \code{TRUE} (the default), only
+    the multivariate test statistic is computed.}  
 }
+
 \details{
   The multivariate ARCH-LM test is based on the following regression
   (the univariate test can be considered as special case of the
@@ -66,7 +69,8 @@ arch(x, lags.single = 16, lags.multi = 5)
 
   \item{resid}{A matrix with the residuals of the VAR.}
   \item{arch.uni}{A list with objects of class \sQuote{\code{htest}}
-    containing the univariate ARCH-LM tests per equation.}
+    containing the univariate ARCH-LM tests per equation. This element
+    is only returned if \code{multivariate.only = FALSE} is set.}
   \item{arch.mul}{An object with class attribute \sQuote{\code{htest}}
       containing the multivariate ARCH-LM statistic.}
 }

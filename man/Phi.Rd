@@ -92,7 +92,7 @@
 
 \seealso{
   \code{\link{Psi}}, \code{\link{VAR}}, \code{\link{SVAR}},
-  \code{\link{SVAR2}}, \code{\link{vec2var}}, \code{\link{SVEC}} 
+  \code{\link{vec2var}}, \code{\link{SVEC}} 
 }
 
 \examples{

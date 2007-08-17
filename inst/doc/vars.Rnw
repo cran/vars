@@ -315,7 +315,7 @@ var2c.arch
 The Jarque-Bera normality tests for univariate and multivariate series are implemented and applied to the residuals of a VAR(p) as well as seperate tests for multivariate skewness and kurtosis (see \citeasnoun{BER1980}, [\citeyear*{BER1981}] and \citeasnoun{JAR1987} and \citeasnoun{LUE2006}). The univariate versions of the Jarque-Bera test are applied to the residuals of each equation. A multivariate version of this test can be computed by using the residuals that are standardized by a Choleski decomposition of the variance-covariance matrix for the centered residuals. Please note, that in this case the test result is dependant upon the ordering of the variables.
 % 
 <<diag1, echo = TRUE>>=
-var2c.norm <- normality(var.2c)
+var2c.norm <- normality(var.2c, multivariate.only = TRUE)
 names(var2c.norm)
 var2c.norm
 plot(var2c.norm)
@@ -353,10 +353,11 @@ Q_h^* = T^2 \sum_{j=1}^h \frac{1}{T-j} tr(\hat{C}_j'\hat{C}_0^{-1}\hat{C}_j\hat{
 may be better, and is available as the second entry in the list element \texttt{pt.mul}.\\  
 %
 <<diag2, echo = TRUE>>=
-var2c.serial <- serial(var.2c, lags.pt = 16, lags.bg = 5)
-names(var2c.serial)
-var2c.serial$pt.mul
-plot(var2c.serial)
+var2c.pt.asy <- serial(var.2c, lags.pt = 16, type = "PT.asymptotic")
+var2c.pt.asy
+var2c.pt.adj <- serial(var.2c, lags.pt = 16, type = "PT.adjusted")
+var2c.pt.adj
+plot(var2c.pt.asy)
 @
 %
 \par
@@ -375,8 +376,10 @@ LM_h = T(K - tr(\tilde{\Sigma}_R^{-1}\tilde{\Sigma}_e))  \quad ,
 where $\tilde{\Sigma}_R$ and $\tilde{\Sigma}_e$ assign the residual covariance matrix of the restricted and unrestricted model, respectively. The test statistic $LM_h$ is distributed as $\chi^2(hK^2)$ and is returned by the function \texttt{serial()} as list element \texttt{LMh} with class attribute \texttt{htest}.
 % 
 <<diag3, echo = TRUE>>=
-var2c.serial$LMh
-var2c.serial$LMFh
+var2c.BG <- serial(var.2c, lags.pt = 16, type = "BG")
+var2c.BG
+var2c.ES <- serial(var.2c, lags.pt = 16, type = "ES")
+var2c.ES
 @
 %
 \citeasnoun{EDG1999} proposed a small sample correction, which is defined as:
@@ -726,10 +729,11 @@ Depending on the imposed restrictions, three types of SVAR- models can be distin
 \label{subsec:svar-est}
 %
 A SVAR model is estimated with the function
-\texttt{SVAR()}.\footnote{The exhibition is confined to the function
-  \texttt{SVAR()}. Incidentally, with function \texttt{SVAR2()} a SVAR
-  model can estimated too, thereby a scoring algorithm as suggested by
-  \citeasnoun{AMI97} is utilised.} Its arguments are shown in the
+\texttt{SVAR()}.\footnote{The following exhibition uses the estimation method
+\texttt{logLik} for directly minimising the negative
+log-likelihood function. It also possible to use a scoring algorithm. Hereby,
+the restrictions have to be provided in a different form (see
+\texttt{example(SVAR)} for further details.} Its arguments are shown in the
 R-code example below. An object with class attribute \texttt{varest}
 has to be provided as argument \texttt{x}. Whether an A-, B- or
 AB-model will be estimated, is dependent on the setting for
@@ -772,7 +776,8 @@ by utilising \texttt{optim}.
 %
 <<SVAR2, echo = TRUE>>=
 args(optim)
-svar2c.A <- SVAR(var.2c, Amat = amat, Bmat = NULL, hessian = TRUE, method = "BFGS")
+svar2c.A <- SVAR(var.2c, estmethod = "logLik", Amat = amat, Bmat = NULL, 
+   hessian = TRUE, method = "BFGS") 
 svar2c.A
 @ 
 %
@@ -936,7 +941,8 @@ estimated standard errors of these parameters can be calculated by a
 bootstrapping procedure. The latter is controlled by the functional
 argument \texttt{boot} in \texttt{SVEC}; its default value is
 \texttt{FALSE}.   
-%  
+%
+\newpage
 %
 \listoftables
 %

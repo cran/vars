@@ -84,7 +84,7 @@ BQ(x)
 \author{Bernhard Pfaff}
 
 \seealso{
-  \code{\link{SVAR}}, \code{\link{SVAR2}}, \code{\link{VAR}}
+  \code{\link{SVAR}}, \code{\link{VAR}}
 }
 
 \examples{

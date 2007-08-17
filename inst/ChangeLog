@@ -1,3 +1,48 @@
+2007-08-17    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/restrict.R ("restrict"): Inserted stop() in ser() if no
+	significant regressors are remaining.
+
+2007-08-15    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/SVAR2.R: Deprecated, SVAR estimation is now included in
+	function SVAR as default.
+	* R/SVAR.R ("SVAR"): Included argument estmethod = c("scoring",
+	"logLik") and the non-overlapping arguments formerly SVAR2. The
+	function SVAR is now a wrapper to the formerly SVAR and SVAR2
+	functions, which are renamed to .SVAR1 and .SVAR2, respectively.  
+
+2007-08-14    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/arch.R ("arch"): Argument multivariate.only = TRUE inserted.
+	* R/normality.R ("normality"): Argument multivariate.only = TRUE inserted.
+	* R/serial.R: Argument type = c("PT.asymptotic", "PT.adjusted", "BG", "ES") inserted.
+
+2007-08-09    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varirf.R ("plot.varirf"): Plot method for objects of class
+	varirf enhanced.
+	* R/plot.varstabil.R ("plot.varstabil"): Plot method for objects of class
+	varstabil enhanced.
+	* R/fanchart.R ("fanchart"): Function enhancement for single
+	variable plotting and customisation of graphs.
+
+2007-08-08    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varfevd.R: Plot method for objects of class
+	varfevd enhanced. 
+	* R/plot.varest.R: Plot method for objects of class
+	varest enhanced.
+	* R/plot.vec2var.R: Plot method for objects of class
+	vec2var enhanced.
+	* R/plot.varcheck.R ("plot.varcheck"): Plot method for objects of class
+	varcheck enhanced. 
+	
+2007-08-07    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varprd.R (plot.varprd): Plot method for objects of class
+	varprd enhanced.
+
 2007-08-06    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/predict.varest.R ("predict.varest"): Season > n.ahead: coerced
