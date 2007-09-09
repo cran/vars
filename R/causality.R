@@ -19,10 +19,10 @@ function(x, cause = NULL){
   Z <- x$datamat[, -c(1 : K)]
   PI <- B(x)
   if(ncol(PI) > K*p){
-    colnames(PI) <- c(rep(y.names, 2), colnames(PI)[(K*p + 1):ncol(PI)])
+    colnames(PI) <- c(rep(y.names, p), colnames(PI)[(K*p + 1):ncol(PI)])
     detcoeff <- length(PI) - K^2 * p
   } else {
-    colnames(PI) <- rep(y.names, 2)
+    colnames(PI) <- rep(y.names, p)
     detcoeff <- 0
   }
   rownames(PI) <- y.names

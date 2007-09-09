@@ -1,3 +1,12 @@
+2007-08-21    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/restrict.R ("restrict"): Fixed buglet: if all rhs-variables
+	are significant.
+	* R/causality.R ("causality"): Fixed buglet: duplication of y.names
+	for matching set to p.
+	* R/SVAR.R ("SVAR"): Fixed buglet: In call to SVAR2 max.iter =
+	max.iter.
+	
 2007-08-17    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/restrict.R ("restrict"): Inserted stop() in ser() if no

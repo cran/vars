@@ -5,7 +5,7 @@
   estmethod <- match.arg(estmethod)
   call <- match.call()
   if(estmethod == "scoring"){
-    svar <- .SVAR2(x, Ra = Ra, Rb = Rb, ra = ra, rb = ra, start = start, max.iter = 100, conv.crit = 0.1e-6, maxls = 1.0, lrtest = lrtest)
+    svar <- .SVAR2(x, Ra = Ra, Rb = Rb, ra = ra, rb = ra, start = start, max.iter = max.iter, conv.crit = conv.crit, maxls = maxls, lrtest = lrtest)
   } else {
     svar <- .SVAR1(x, Amat = Amat, Bmat = Bmat, start = start, lrtest = lrtest, ...)
   }
