@@ -12,7 +12,7 @@
 }
 
 \usage{
-causality(x, cause = NULL)
+causality(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100)
 }
 
 \arguments{
@@ -21,6 +21,10 @@ causality(x, cause = NULL)
   \item{cause}{A character vector of the cause variable(s). If not set,
     then the variable in the first column of \code{x$y} is used as cause
     variable and a warning is printed.}   
+  \item{vcov.}{a specification of the covariance matrix of the estimated coefficients. This can be
+    specified as a matrix or as a function yielding a matrix when applied to \code{x}.}
+  \item{boot}{Logical. Whether a wild bootstrap procedure should be used to compute the critical values. Default is no}
+  \item{boot.runs}{Number of bootstrap replications if boot=TRUE}
 }
 
 \details{
@@ -64,7 +68,15 @@ causality(x, cause = NULL)
     \frac{1}{2}K(K + 1))} and is defined such that for any symmetric
   \eqn{(K \times K)} matrix A, \eqn{vec(A) = D_K vech(A)} holds. The
   test statistic \eqn{\lambda_W} is asymptotically distributed as
-  \eqn{\chi^2(N)}.   
+  \eqn{\chi^2(N)}.
+  
+  Fot the Granger causality test, a robust covariance-matrix estimator can be 
+  used in case of heteroskedasticity through argument \code{vcov.} It can be either a pre-computed matrix or
+  a function for extracting the covariance matrix. See \code{\link[sandwich]{vcovHC}}
+  from package \pkg{sandwich} for further details. 
+
+  A wild bootstrap computation (imposing the restricted model as null)
+  of the p values is available through argument \code{boot} and \code{boot.runs} following Hafner and Herwartz (2009). 
 }
 
 \value{
@@ -88,7 +100,11 @@ causality(x, cause = NULL)
   Granger, C. W. J. (1969), Investigating causal relations by
   econometric models and cross-spectral methods, \emph{Econometrica},
   \bold{37}: 424-438. 
-  
+
+  Hafner, C. M. and Herwartz, H. (2009) Testing for linear vector autoregressive 
+  dynamics under multivariate generalized autoregressive heteroskedasticity, 
+  \emph{Statistica Neerlandica}, \bold{63}: 294-323
+
   Hamilton, J. (1994), \emph{Time Series Analysis}, Princeton
   University Press, Princeton.
 
@@ -97,6 +113,9 @@ causality(x, cause = NULL)
   
   Venables, W. N. and B. D. Ripley (2002), \emph{Modern Applied
     Statistics with S}, 4th edition, Springer, New York.
+
+  Zeileis, A. (2006) Object-Oriented Computation of Sandwich Estimators
+  \emph{Journal of Statistical Software}, \bold{16}, 1-16
 }
 
 \seealso{
@@ -107,6 +126,12 @@ causality(x, cause = NULL)
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
 causality(var.2c, cause = "e")
+
+#use a robust HC variance-covariance matrix for the Granger test:
+causality(var.2c, cause = "e", vcov.=vcovHC(var.2c))
+
+#use a wild-bootstrap procedure to for the Granger test
+\dontrun{causality(var.2c, cause = "e", boot=TRUE, boot.runs=1000)}
 }
 
 \keyword{regression}
