@@ -1,8 +1,8 @@
 Package: vars
 Type: Package
 Title: VAR Modelling
-Version: 1.4-7
-Date: 2010-02-05
+Version: 1.4-8
+Date: 2010-08-22
 Author: Bernhard Pfaff
 Maintainer: Bernhard Pfaff <bernhard@pfaffikus.de>
 Depends: R (>= 2.0.0), MASS, strucchange, urca (>= 1.1-6), lmtest (>=
@@ -16,6 +16,6 @@ License: GPL (>= 2)
 URL: http://www.pfaffikus.de
 Repository: CRAN
 Repository/R-Forge/Project: vars
-Repository/R-Forge/Revision: 72
-Date/Publication: 2010-03-01 08:40:34
-Packaged: 2010-02-13 21:21:02 UTC; rforge
+Repository/R-Forge/Revision: 77
+Date/Publication: 2010-08-27 06:24:17
+Packaged: 2010-08-24 21:01:23 UTC; rforge
