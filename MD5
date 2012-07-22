@@ -1,4 +1,4 @@
-9b4b47093cd38bb871438252770517fa *DESCRIPTION
+ff0b270d9e33332620240363bf8ecab5 *DESCRIPTION
 296c8142d0d796fa63eb9edd02268106 *NAMESPACE
 4dd92ec7a5f91376739a24037d027539 *R/A.R
 eacc82322f1491f6342045ddf0e1398b *R/B.R
@@ -69,9 +69,9 @@ d96037b282f673527846ae570aca6bc4 *R/restrict.R
 58a4627ddf37b264b3119218cf351d64 *R/summary.varest.R
 d66daa8b678ac90011e46290b376740d *R/toMlm.R
 0963e0131785ec7ceb32a90802898336 *R/vec2var.R
-fb7dc5a756544e73df02be1b74ae6370 *data/Canada.RData
+b0578a9e41adcf0757574f87e87d4e0c *data/Canada.RData
 fb00566ef2f336ac48897297586819a7 *inst/CITATION
-94c5eb30494ef9b4fc0630c939828507 *inst/ChangeLog
+58fe1ff28a8481afcc6baac8b700bdb3 *inst/ChangeLog
 37f41732af6b725e695e6ae0d64fd330 *inst/book-ex/Rcode-1-1.R
 9b1628f0920e1b3ddd18e078220912f3 *inst/book-ex/Rcode-1-2.R
 0e45680f08e811584c5f3f5b62e8f81b *inst/book-ex/Rcode-1-3.R
@@ -124,14 +124,8 @@ ef45dd5f131ce8cd06b43c7ccaa62bfa *inst/book-ex/Rcode-8-5.R
 00b9b4f5655c3a1e0f7eba38c69aeb2b *inst/book-ex/Rcode-8-8.R
 aa8035977ef734912a56460f1dda22a7 *inst/book-ex/Rcode-8-9.R
 d678cef3bf989fb16d505b9741de603b *inst/book-ex/ex2.tar.gz
-87940e7c6e43fb06abb82cb4466e7cd0 *inst/doc/Figures/fig-1.pdf
-8294630aa85b15953f0519a0b8583604 *inst/doc/Figures/fig-2.pdf
-3a5c05328b02f85e087f090d5214cd8d *inst/doc/Figures/fig-3.pdf
-26ad854e8820c6e50b09c34e638cb671 *inst/doc/Figures/fig-4.pdf
-25369eaa7671f35befddde54ead21b7e *inst/doc/Figures/fig-5.pdf
 7b9cea54a8389901a9379eebcb6fe899 *inst/doc/vars.Rnw
-d159138b6e6b2a34e9a57a8f6fde6424 *inst/doc/vars.bib
-fd8f4534a567dac6bf81fb3a87514b93 *inst/doc/vars.pdf
+09858d10dd10d3c9c8bd87a8272dde1a *inst/doc/vars.pdf
 617b1e9cba54476239122b8226a2a74e *man/A.Rd
 1efcb371cf6f3ad9546ee04e1a977a6c *man/B.Rd
 73979eb1a8c005cd4eca9cac15c5b65b *man/BQ.Rd
@@ -165,3 +159,10 @@ e7aee8c6118aa78ee4827183180749c9 *man/vec2var.Rd
 a7370133da5acf53dd76bd6492a722b3 *tests/CheckCausality.Rout
 7f19fcb1f4c6c83d45afb48353598a37 *tests/ExamplesTest.R
 559272a77f0df5b5a83db8eb4c3753f2 *tests/ExamplesTest.Rout
+87940e7c6e43fb06abb82cb4466e7cd0 *vignettes/Figures/fig-1.pdf
+8294630aa85b15953f0519a0b8583604 *vignettes/Figures/fig-2.pdf
+3a5c05328b02f85e087f090d5214cd8d *vignettes/Figures/fig-3.pdf
+26ad854e8820c6e50b09c34e638cb671 *vignettes/Figures/fig-4.pdf
+25369eaa7671f35befddde54ead21b7e *vignettes/Figures/fig-5.pdf
+7b9cea54a8389901a9379eebcb6fe899 *vignettes/vars.Rnw
+d159138b6e6b2a34e9a57a8f6fde6424 *vignettes/vars.bib
