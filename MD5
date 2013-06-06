@@ -1,4 +1,4 @@
-ff0b270d9e33332620240363bf8ecab5 *DESCRIPTION
+88dc814effbfd3a228c175fade169bbc *DESCRIPTION
 296c8142d0d796fa63eb9edd02268106 *NAMESPACE
 4dd92ec7a5f91376739a24037d027539 *R/A.R
 eacc82322f1491f6342045ddf0e1398b *R/B.R
@@ -14,7 +14,7 @@ cfe5589a29e443d7dc093781979a53e3 *R/Psi.vec2var.R
 c3ab3edd50dc218adee5dcd8fb58269e *R/SVAR.R
 9d37ed3843fbaf0c5e81a4286c4c44a2 *R/SVEC.R
 78f73a6ebac8cdcdc3424061fc5a181e *R/VAR.R
-e638d3316ad2a3cc7ce2b7b5d6f50d13 *R/VARselect.R
+3d6f6733045d5b3f235c41044b6fb2dd *R/VARselect.R
 70ef22b3467865edaf97f891821e1b38 *R/arch.R
 3a9f5cf76594c1cb0ff04d5898590f6d *R/causality.R
 36167ce21ab75a3ac08b32fa7b99d8b9 *R/coef.varest.R
@@ -34,8 +34,8 @@ fa8e9ee083c04358ba5b6980c8070fc4 *R/fevd.vec2var.R
 864dac28ba0af4196bb4b331eeb4832c *R/irf.vec2var.R
 4837302a7ad9d10fbb2751d7ad9c2542 *R/logLik.svarest.R
 881ff8d6337ea5624d068212b0750b37 *R/logLik.svecest.R
-f842a1420576be8701dbc9ef0fe8a51f *R/logLik.varest.R
-cea704df235a6819f5202560f166aa5c *R/logLik.vec2var.R
+7d12ba03f209377959580d4f1e931d5c *R/logLik.varest.R
+af16f857f33c4b0bbda9df68e243debc *R/logLik.vec2var.R
 ca62031a3488f6ce0ead5126d76fa979 *R/normality.R
 1fd4d5af209d784bb186c4fefd96fae8 *R/plot.varcheck.R
 27199ad6b76a0ae608d699974f1efa30 *R/plot.varest.R
@@ -69,7 +69,7 @@ d96037b282f673527846ae570aca6bc4 *R/restrict.R
 58a4627ddf37b264b3119218cf351d64 *R/summary.varest.R
 d66daa8b678ac90011e46290b376740d *R/toMlm.R
 0963e0131785ec7ceb32a90802898336 *R/vec2var.R
-b0578a9e41adcf0757574f87e87d4e0c *data/Canada.RData
+13f86984c238b9d1f19cadc5254572fb *data/Canada.RData
 fb00566ef2f336ac48897297586819a7 *inst/CITATION
 58fe1ff28a8481afcc6baac8b700bdb3 *inst/ChangeLog
 37f41732af6b725e695e6ae0d64fd330 *inst/book-ex/Rcode-1-1.R
@@ -124,8 +124,9 @@ ef45dd5f131ce8cd06b43c7ccaa62bfa *inst/book-ex/Rcode-8-5.R
 00b9b4f5655c3a1e0f7eba38c69aeb2b *inst/book-ex/Rcode-8-8.R
 aa8035977ef734912a56460f1dda22a7 *inst/book-ex/Rcode-8-9.R
 d678cef3bf989fb16d505b9741de603b *inst/book-ex/ex2.tar.gz
+efa70aa743a85cf2373dc92cda0aac96 *inst/doc/vars.R
 7b9cea54a8389901a9379eebcb6fe899 *inst/doc/vars.Rnw
-09858d10dd10d3c9c8bd87a8272dde1a *inst/doc/vars.pdf
+d2814b9ad76cb95813bd239a50ac87ab *inst/doc/vars.pdf
 617b1e9cba54476239122b8226a2a74e *man/A.Rd
 1efcb371cf6f3ad9546ee04e1a977a6c *man/B.Rd
 73979eb1a8c005cd4eca9cac15c5b65b *man/BQ.Rd
@@ -133,7 +134,7 @@ d678cef3bf989fb16d505b9741de603b *inst/book-ex/ex2.tar.gz
 8ccd2733385eb0e237aab4f98c27c036 *man/Phi.Rd
 7f34f14aa5af636b746bb8766fb2768c *man/Psi.Rd
 5e758ec01c2e3d8a052cede1cb1f74e3 *man/SVAR.Rd
-adb1581e74abb54f77720099858d03e0 *man/SVEC.Rd
+1f1b890a8019b20803813428a9465037 *man/SVEC.Rd
 abfb9e15a605bacbf560a6e3d8836e27 *man/VAR.Rd
 f18f0d02cbffe6f4680a5d8236ced8a6 *man/VARselect.Rd
 5debcf3f7e6cb19cc611e89c9f3723ce *man/arch.Rd
@@ -152,7 +153,7 @@ f9ab7200c5b274f3a5091cf59eac5793 *man/restrict.Rd
 7bc97decb787f675bbe714402e2de76e *man/roots.Rd
 a855a8f43f502509a5ca7d48ff6ebad4 *man/serial.Rd
 2ef14baf65c42f1f733c121d49af0096 *man/stability.Rd
-5b1c139c033f4fa62f06ee27a67488be *man/summary.Rd
+cd10ba3fc139f7380109e2089a9a809a *man/summary.Rd
 d5cc8bbac12c6fc2c98ba61b43bde8e3 *man/vars-deprecated.Rd
 e7aee8c6118aa78ee4827183180749c9 *man/vec2var.Rd
 36cb7b2374af389e78b10a9a0f5c9a53 *tests/CheckCausality.R

@@ -1,8 +1,8 @@
 Package: vars
 Type: Package
 Title: VAR Modelling
-Version: 1.5-0
-Date: 2012-07-22
+Version: 1.5-1
+Date: 2013-06-06
 Authors@R: c(person("Bernhard", "Pfaff", email =
         "bernhard@pfaffikus.de", role = c("aut", "cre")),
         person("Matthieu", "Stigler", role = "ctb"))
@@ -19,6 +19,8 @@ Author: Bernhard Pfaff [aut, cre], Matthieu Stigler [ctb]
 Maintainer: Bernhard Pfaff <bernhard@pfaffikus.de>
 Repository: CRAN
 Repository/R-Forge/Project: vars
-Repository/R-Forge/Revision: 87
-Packaged: 2012-07-22 14:20:52 UTC; rforge
-Date/Publication: 2012-07-26 21:28:30
+Repository/R-Forge/Revision: 96
+Repository/R-Forge/DateTimeStamp: 2013-06-06 17:34:52
+Date/Publication: 2013-06-08 06:57:40
+Packaged: 2013-06-06 18:17:04 UTC; rforge
+NeedsCompilation: no
