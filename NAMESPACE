@@ -55,10 +55,12 @@ S3method(predict, vec2var)
 S3method(residuals, varest)
 S3method(residuals, vec2var)
 
+S3method(stability, default)
+S3method(stability, varest)
+
 S3method(summary, varest)
 S3method(summary, svarest)
 S3method(summary, svecest)
-
 
 importFrom(lmtest, coeftest)
 importFrom(sandwich, bread)
@@ -75,6 +77,16 @@ S3method(vcov, varest)
 importFrom(urca, ca.jo)
 importFrom(urca, cajorls)
 
+importFrom("grDevices", "gray", "gray.colors", "xy.coords")
+importFrom("graphics", "abline", "axis", "barplot", "box", "hist",
+           "layout", "lines", "mtext", "par", "plot", "polygon",
+           "title")
+importFrom("stats", "acf", "as.formula", "coef", "cor", "cov",
+           "density", "embed", "fitted", "lm", "lm.fit",
+           "model.matrix", "na.omit", "optim", "pacf", "pchisq", "pf",
+           "plot.ts", "predict", "printCoefmat", "qnorm", "quantile",
+           "resid", "residuals", "rnorm", "update", "vcov")
+importFrom("utils", "head", "tail")
 
-
-
+import(MASS)
+import(strucchange)

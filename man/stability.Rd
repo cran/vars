@@ -1,7 +1,8 @@
 \name{stability}
 
 \alias{stability}
-
+\alias{stability.default}
+\alias{stability.varest}
 \alias{print.varstabil}
 
 \title{Structural stability of a VAR(p)}
@@ -16,9 +17,12 @@
 }
 
 \usage{
-stability(x, type = c("OLS-CUSUM", "Rec-CUSUM", "Rec-MOSUM",
-"OLS-MOSUM", "RE", "ME", "Score-CUSUM", "Score-MOSUM",
-"fluctuation"), h = 0.15, dynamic = FALSE, rescale = TRUE)
+\method{stability}{default}(x, type = c("OLS-CUSUM", "Rec-CUSUM",
+"Rec-MOSUM", "OLS-MOSUM", "RE", "ME", "Score-CUSUM", "Score-MOSUM",
+"fluctuation"), h = 0.15, dynamic = FALSE, rescale = TRUE, ...)
+\method{stability}{varest}(x, type = c("OLS-CUSUM", "Rec-CUSUM",
+"Rec-MOSUM", "OLS-MOSUM", "RE", "ME", "Score-CUSUM", "Score-MOSUM",
+"fluctuation"), h = 0.15, dynamic = FALSE, rescale = TRUE, ...)
 }
 
 \arguments{
@@ -36,7 +40,8 @@ stability(x, type = c("OLS-CUSUM", "Rec-CUSUM", "Rec-MOSUM",
     standardized by the regressor matrix of the corresponding subsample;
     if \sQuote{\code{FALSE}} the whole regressor matrix will be
     used. (only if \sQuote{\code{type}} is either \sQuote{\code{RE}} or
-    \sQuote{\code{E}}).}    
+    \sQuote{\code{E}}).}
+  \item{...}{Ellipsis, is passed to \code{strucchange::sctest()}, as default.}
 }
 \details{
   For details, please refer to documentation \code{\link[strucchange]{efp}}.

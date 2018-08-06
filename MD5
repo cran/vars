@@ -1,5 +1,5 @@
-7c0ea097943e6921c8e1c4be6262f9bf *DESCRIPTION
-296c8142d0d796fa63eb9edd02268106 *NAMESPACE
+cebe6d9ae7bc0385701464b630148d53 *DESCRIPTION
+1dc27517125be99c361e1c4224b48ed6 *NAMESPACE
 4dd92ec7a5f91376739a24037d027539 *R/A.R
 eacc82322f1491f6342045ddf0e1398b *R/B.R
 2998a738453acaa76859b7311f428441 *R/BQ.R
@@ -26,7 +26,7 @@ a7d2b5c840273f0c7f5a09f6f93e3c87 *R/fevd.varest.R
 fa8e9ee083c04358ba5b6980c8070fc4 *R/fevd.vec2var.R
 0b57247d1ef58eb15c235e629d4ee402 *R/fitted.varest.R
 33ff81a04a1b2c58d5302bd1e7c6079a *R/fitted.vec2var.R
-4983ad6aafd063432af98076794adc9e *R/internal.R
+a2605554f11faf83cfa8ed86e5e4c9a5 *R/internal.R
 5fe16a4700b6f22d9f3214708c0bc560 *R/irf.R
 9f4342498f45a4c241b54b537909fefb *R/irf.svarest.R
 6b46a10cf90365bae7d6e88406b3c7c3 *R/irf.svecest.R
@@ -63,13 +63,14 @@ bd785a61bed40cdf2ed02b99d66f0f13 *R/residuals.vec2var.R
 d96037b282f673527846ae570aca6bc4 *R/restrict.R
 64a79d7438a0e402d0c7cf1196f38c8a *R/roots.R
 0280d0eca18f7515e921e84b822776c0 *R/serial.R
-17833b8a5dac689504b5dc1945a96242 *R/stability.R
+7631958860b85fbee651bfd77921f3cb *R/stability.R
 4ca542a990195342888e0b160f6533b5 *R/summary.svarest.R
 453aafad48ed3af156f01aa7cd5a14a6 *R/summary.svecest.R
 58a4627ddf37b264b3119218cf351d64 *R/summary.varest.R
 d66daa8b678ac90011e46290b376740d *R/toMlm.R
 0963e0131785ec7ceb32a90802898336 *R/vec2var.R
-13f86984c238b9d1f19cadc5254572fb *data/Canada.RData
+d825889d014634156f7575dd7fc09f19 *build/vignette.rds
+f5d4fe1e0271103ca33cb5484a681b06 *data/Canada.RData
 fb00566ef2f336ac48897297586819a7 *inst/CITATION
 58fe1ff28a8481afcc6baac8b700bdb3 *inst/ChangeLog
 37f41732af6b725e695e6ae0d64fd330 *inst/book-ex/Rcode-1-1.R
@@ -126,7 +127,7 @@ aa8035977ef734912a56460f1dda22a7 *inst/book-ex/Rcode-8-9.R
 d678cef3bf989fb16d505b9741de603b *inst/book-ex/ex2.tar.gz
 efa70aa743a85cf2373dc92cda0aac96 *inst/doc/vars.R
 7b9cea54a8389901a9379eebcb6fe899 *inst/doc/vars.Rnw
-d2814b9ad76cb95813bd239a50ac87ab *inst/doc/vars.pdf
+210515f1a0f856839c4606c758176f1b *inst/doc/vars.pdf
 617b1e9cba54476239122b8226a2a74e *man/A.Rd
 1efcb371cf6f3ad9546ee04e1a977a6c *man/B.Rd
 73979eb1a8c005cd4eca9cac15c5b65b *man/BQ.Rd
@@ -152,7 +153,7 @@ c0319656c6b20015c8f3c75efedd20af *man/residuals.Rd
 f9ab7200c5b274f3a5091cf59eac5793 *man/restrict.Rd
 7bc97decb787f675bbe714402e2de76e *man/roots.Rd
 a855a8f43f502509a5ca7d48ff6ebad4 *man/serial.Rd
-2ef14baf65c42f1f733c121d49af0096 *man/stability.Rd
+ffdb578b74eb4b571909096c82b45eef *man/stability.Rd
 cd10ba3fc139f7380109e2089a9a809a *man/summary.Rd
 d5cc8bbac12c6fc2c98ba61b43bde8e3 *man/vars-deprecated.Rd
 e7aee8c6118aa78ee4827183180749c9 *man/vec2var.Rd
@@ -161,7 +162,7 @@ a7370133da5acf53dd76bd6492a722b3 *tests/CheckCausality.Rout
 7f19fcb1f4c6c83d45afb48353598a37 *tests/ExamplesTest.R
 559272a77f0df5b5a83db8eb4c3753f2 *tests/ExamplesTest.Rout
 87940e7c6e43fb06abb82cb4466e7cd0 *vignettes/Figures/fig-1.pdf
-8294630aa85b15953f0519a0b8583604 *vignettes/Figures/fig-2.pdf
+52b0a4870ed64c81c1ef0ced7a5aa1e0 *vignettes/Figures/fig-2.pdf
 3a5c05328b02f85e087f090d5214cd8d *vignettes/Figures/fig-3.pdf
 26ad854e8820c6e50b09c34e638cb671 *vignettes/Figures/fig-4.pdf
 25369eaa7671f35befddde54ead21b7e *vignettes/Figures/fig-5.pdf
