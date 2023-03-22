@@ -1,6 +1,6 @@
 "residuals.vec2var" <-
 function(object, ...){
-  if (!(class(object) == "vec2var")) {
+  if (!is(object, "vec2var")) {
     stop("\nPlease, provide object of class 'vec2var' as 'object'.\n")
   }
   resids <- object$datamat[, colnames(object$y)] - object$datamat[, colnames(object$deterministic)] %*% t(object$deterministic)

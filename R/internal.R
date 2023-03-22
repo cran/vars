@@ -84,13 +84,13 @@ function(x, n.ahead, K) {
 ##
 ".irf" <-
 function(x, impulse, response, y.names, n.ahead, ortho, cumulative){
-  if((class(x) == "varest") || (class(x) == "vec2var")){
+  if(is(x, "varest") || is(x, "vec2var")){
     if(ortho){
       irf <- Psi(x, nstep = n.ahead)
     } else {
       irf <- Phi(x, nstep = n.ahead)
     }
-  } else if((class(x) == "svarest") || (class(x) == "svecest")){
+  } else if(is(x, "svarest") || is(x, "svecest")){
     irf <- Phi(x, nstep = n.ahead)
   }
   dimnames(irf) <- list(y.names, y.names, NULL)
@@ -118,9 +118,9 @@ function(x, impulse, response, y.names, n.ahead, ortho, cumulative){
 ".boot" <-
 function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.names){
   if(!(is.null(seed))) set.seed(abs(as.integer(seed)))
-  if(class(x) == "varest"){
+  if(is(x, "varest")){
     VAR <- eval.parent(x)
-  }else if(class(x) == "svarest"){
+  }else if(is(x, "svarest")){
     VAR <- eval.parent(x$var)
   } else {
     stop("Bootstrap not implemented for this class.\n")
@@ -152,7 +152,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
       lasty <- c(ysampled[j + p, ], lasty) 
     }
     varboot <- update(VAR, y = ysampled)
-    if(class(x) == "svarest"){
+    if(is(x, "svarest")){
       varboot <- update(x, x = varboot)
     }
     BOOT[[i]] <- .irf(x = varboot, n.ahead = n.ahead, ortho = ortho, cumulative = cumulative, impulse = impulse, response = response, y.names=y.names)

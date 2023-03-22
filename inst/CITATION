@@ -2,9 +2,9 @@ citHeader("To cite vars in publications use:")
 
 citFooter("For BibTex versions of citations use: toBibtex(citation('vars'))")
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
   title        = "VAR, SVAR and SVEC Models: Implementation Within {R} Package {vars}",
-  author       = personList(as.person("Bernhard Pfaff")),
+  author       = c(as.person("Bernhard Pfaff")),
   journal      = "Journal of Statistical Software",
   year         = "2008",
   volume       = "27",
@@ -18,9 +18,9 @@ citEntry(entry = "Article",
         "URL https://www.jstatsoft.org/v27/i04/.")
 ) 
 
-citEntry(entry = "Book",
+bibentry(bibtype = "Book",
          title = "Analysis of Integrated and Cointegrated Time Series with R",
-         author = personList(as.person("B. Pfaff")),
+         author = c(as.person("B. Pfaff")),
 	 publisher = "Springer",
          edition = "Second",
          address      = "New York",

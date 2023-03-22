@@ -1,6 +1,6 @@
 "fitted.vec2var" <-
 function(object, ...){
-  if (!(class(object) == "vec2var")) {
+  if (!is(object, "vec2var")) {
     stop("\nPlease, provide object of class 'vec2var' as 'object'.\n")
   }
   resids <- resid(object)

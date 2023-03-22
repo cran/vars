@@ -87,6 +87,6 @@ importFrom("stats", "acf", "as.formula", "coef", "cor", "cov",
            "plot.ts", "predict", "printCoefmat", "qnorm", "quantile",
            "resid", "residuals", "rnorm", "update", "vcov")
 importFrom("utils", "head", "tail")
-
+importFrom("methods", "is")
 import(MASS)
 import(strucchange)

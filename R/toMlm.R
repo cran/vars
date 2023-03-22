@@ -1,12 +1,12 @@
-toMlm<- function(x, ...) {
+toMlm <- function(x, ...) {
   UseMethod("toMlm")
 }
 
-toMlm.default <- function(x){
+toMlm.default <- function(x, ...){
   lm(x$model)
 }
 
-toMlm.varest<-function(x){
+toMlm.varest<-function(x, ...){
   ix <- 1:x$K
   X<-x$datamat
   type<-x$type

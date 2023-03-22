@@ -108,7 +108,7 @@ runs = 100, seed = NULL, ...)
 
 \references{
   Efron, B. and R. J. Tibshirani (1993), \emph{An Introduction to the
-    Bootstrap}, Chapman \& Hall, New York. 
+    Bootstrap}, Chapman and Hall, New York. 
   
   Hamilton, J. (1994), \emph{Time Series Analysis}, Princeton
   University Press, Princeton.

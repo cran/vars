@@ -1,6 +1,6 @@
 "SVEC" <-
 function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit = 1e-07, maxls = 1, lrtest = TRUE, boot = FALSE, runs = 100){
-  if (!(class(x) == "ca.jo")) {
+  if (!is(x, "ca.jo")) {
     stop("\nPlease, provide object of class 'ca.jo' as 'z'.\n")
   }
   if((is.null(LR)) || (is.null(SR))){

@@ -1,6 +1,6 @@
 "vec2var" <-
 function(z, r = 1){
-  if (!(class(z) == "ca.jo")) {
+  if (!is(z, "ca.jo")) {
     stop("\nPlease, provide object of class 'ca.jo' as 'z'.\n")
   }
   r <- as.integer(r)
