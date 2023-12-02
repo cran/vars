@@ -1,4 +1,4 @@
-5b126b925d6748f2519775a03fa3936b *DESCRIPTION
+4e75a454e83ba55abf3f0c446a76e57b *DESCRIPTION
 4ea0d8a3af30322665bc8019b35c0ad7 *NAMESPACE
 b28af78594c898f566d4cf67fd48614d *R/A.R
 c5f653b4012561091b9f6e690d5126a3 *R/B.R
@@ -69,8 +69,8 @@ e883d3e41d9d346f50e5c0917ce7b63b *R/serial.R
 58a4627ddf37b264b3119218cf351d64 *R/summary.varest.R
 9ce3143a29f0ee2fcf103610a01cf269 *R/toMlm.R
 e27be898015cb5e1dd39dd61620fc106 *R/vec2var.R
-6341cc54cf1422046ae5c84ee2560fa6 *data/Canada.RData
-8ca5a25728d0bbb2eb79b2d3aa524a90 *inst/CITATION
+11f69726b3edf640a3aae7103e1f5b42 *data/Canada.RData
+56120f2f94eec2b5a01a8b5d9045d3d8 *inst/CITATION
 58fe1ff28a8481afcc6baac8b700bdb3 *inst/ChangeLog
 37f41732af6b725e695e6ae0d64fd330 *inst/book-ex/Rcode-1-1.R
 9b1628f0920e1b3ddd18e078220912f3 *inst/book-ex/Rcode-1-2.R
@@ -154,6 +154,6 @@ cd10ba3fc139f7380109e2089a9a809a *man/summary.Rd
 d5cc8bbac12c6fc2c98ba61b43bde8e3 *man/vars-deprecated.Rd
 e7aee8c6118aa78ee4827183180749c9 *man/vec2var.Rd
 36cb7b2374af389e78b10a9a0f5c9a53 *tests/CheckCausality.R
-a7370133da5acf53dd76bd6492a722b3 *tests/CheckCausality.Rout
+a7370133da5acf53dd76bd6492a722b3 *tests/CheckCausality.Rout.save
 7f19fcb1f4c6c83d45afb48353598a37 *tests/ExamplesTest.R
-559272a77f0df5b5a83db8eb4c3753f2 *tests/ExamplesTest.Rout
+559272a77f0df5b5a83db8eb4c3753f2 *tests/ExamplesTest.Rout.save
